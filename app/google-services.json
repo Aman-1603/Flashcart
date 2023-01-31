@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1024718013634",
+    "project_id": "flashcart-6d908",
+    "storage_bucket": "flashcart-6d908.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1024718013634:android:0a4630511fb3f5c9b2675b",
+        "android_client_info": {
+          "package_name": "com.example.flashcart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1024718013634-46ots50072rema3tps4eu3l63c6in1gu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANohm8qIbqTcXh63hDBQiv2xE5BqHB78I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1024718013634-46ots50072rema3tps4eu3l63c6in1gu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
