@@ -10,9 +10,10 @@
 
 
     <RelativeLayout
+        android:id="@+id/toprelative"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="@drawable/shape_rec01">
+        android:background="#3700b3">
 
 
         <TextView
@@ -34,8 +35,8 @@
 
         <ImageButton
             android:id="@+id/sellerlocation"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@drawable/baseline_my_location_24"
             android:background="#00FFFFFF"
             android:layout_alignParentEnd="true"/>
@@ -57,215 +58,252 @@
         android:src="@drawable/baseline_vpn_key_24"/>
 
 
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/icontv"
-
-        android:background="@drawable/logovirtualshop"/>
-
-
-    <com.blogspot.atifsoftwares.circularimageview.CircularImageView
-        android:id="@+id/sellerprofilepic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/icontv"
-        app:c_border="true"
-        android:translationY="-20dp"
-        app:c_border_width="1dp"
-        app:c_border_color="@color/black"
-        android:src="@drawable/baseline_person_24"
-        android:layout_centerHorizontal="true"/>
-
-
-    <EditText
-        android:id="@+id/sellerEmail"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/sellerprofilepic"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/shape_rec02"
-        android:drawableStart="@drawable/baseline_sms_24"
-        android:drawablePadding="10dp"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:padding="15dp" />
+        android:layout_below="@+id/toprelative"
+        >
 
-    <EditText
-        android:id="@+id/sellerName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sellerpassword"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/shape_rec02"
-        android:drawableStart="@drawable/baseline_person_24"
-        android:drawablePadding="10dp"
-        android:hint="Full Name"
-        android:inputType="textEmailAddress"
-        android:padding="15dp" />
-
-    <EditText
-        android:id="@+id/sellerPhone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sellerName"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/shape_rec02"
-        android:drawableStart="@drawable/baseline_local_phone_24"
-        android:drawablePadding="10dp"
-        android:hint="Phone"
-        android:inputType="textEmailAddress"
-        android:padding="15dp" />
-
-    <EditText
-        android:id="@+id/sellerpassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sellerEmail"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/shape_rec02"
-        android:drawableStart="@drawable/baseline_vpn_key_24"
-        android:drawablePadding="10dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="15dp" />
-
-
-    <LinearLayout
-        android:id="@+id/sellerphoneEt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:orientation="horizontal"
-        android:layout_below="@id/sellerPhone">
-
-        <EditText
-            android:id="@+id/sellercountry"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/shape_rec02"
-            android:drawableStart="@drawable/baseline_add_location_alt_24"
-            android:drawablePadding="10dp"
-            android:hint="country"
-            android:inputType="textPostalAddress"
-            android:layout_weight="1"
-            android:padding="15dp" />
-
-        <EditText
-            android:id="@+id/sellerstate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/shape_rec02"
-            android:drawableStart="@drawable/baseline_add_location_alt_24"
-            android:drawablePadding="10dp"
-            android:hint="state"
-            android:inputType="textPostalAddress"
-            android:layout_weight="1"
-            android:padding="15dp" />
-
-        <EditText
-            android:id="@+id/sellercity"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:background="@drawable/shape_rec02"
-            android:drawableStart="@drawable/baseline_add_location_alt_24"            android:hint="city"
-            android:inputType="textPostalAddress"
-            android:layout_weight="1"
-            android:padding="15dp" />
+            android:layout_height="wrap_content">
 
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
 
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/sellerdetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sellerphoneEt"
-        android:text="Seller detils"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+                android:background="@drawable/logovirtualshop"/>
 
 
-    <EditText
-        android:id="@+id/sellershopename"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sellerdetail"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/shape_rec02"
-        android:drawableStart="@drawable/baseline_store_24"
-        android:drawablePadding="10dp"
-        android:hint="Shop Name"
-        android:inputType="textEmailAddress"
-        android:padding="15dp" />
+            <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+                android:id="@+id/sellerprofilepic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                app:c_border="true"
+                android:translationY="-20dp"
+                app:c_border_width="1dp"
+                app:c_border_color="@color/black"
+                android:layout_marginTop="60dp"
+                android:src="@drawable/baseline_person_24"
+                android:layout_centerHorizontal="true"/>
 
-    <EditText
-        android:id="@+id/sellerdeliveryfees"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/sellershopename"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/shape_rec02"
-        android:drawableStart="@drawable/baseline_attach_money_24"
-        android:drawablePadding="10dp"
-        android:hint="Phone"
-        android:inputType="textEmailAddress"
-        android:padding="15dp" />
 
-    <TextView
-        android:id="@+id/loginforgot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/sellerphoneEt"
-        android:text="Forgot Password ?   "
-        android:textSize="20dp"
-        android:textStyle="bold"/>
+            <EditText
+                android:id="@+id/sellerEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sellerprofilepic"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_rec02"
+                android:drawableStart="@drawable/baseline_sms_24"
+                android:drawablePadding="10dp"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="15dp" />
 
-    <Button
-        android:id="@+id/sellerregisterbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
-        android:text="Register"
-        android:minWidth="120dp"
-        android:minHeight="60dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/sellershopename"
-        android:layout_marginTop="50dp"/>
+            <EditText
+                android:id="@+id/sellerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sellerpassword"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_rec02"
+                android:drawableStart="@drawable/baseline_person_24"
+                android:drawablePadding="10dp"
+                android:hint="Full Name"
+                android:inputType="textEmailAddress"
+                android:padding="15dp" />
+
+            <EditText
+                android:id="@+id/sellerPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sellerName"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_rec02"
+                android:drawableStart="@drawable/baseline_local_phone_24"
+                android:drawablePadding="10dp"
+                android:hint="Phone"
+                android:inputType="textEmailAddress"
+                android:padding="15dp" />
+
+            <EditText
+                android:id="@+id/sellerpassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sellerEmail"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_rec02"
+                android:drawableStart="@drawable/baseline_vpn_key_24"
+                android:drawablePadding="10dp"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="15dp" />
+
+
+            <LinearLayout
+                android:id="@+id/sellerphoneEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:layout_below="@id/sellerPhone">
+
+                <EditText
+                    android:id="@+id/sellercountry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/shape_rec02"
+                    android:drawableStart="@drawable/baseline_add_location_alt_24"
+                    android:drawablePadding="10dp"
+                    android:hint="country"
+                    android:inputType="textPostalAddress"
+                    android:layout_weight="1"
+                    android:padding="15dp" />
+
+                <EditText
+                    android:id="@+id/sellerstate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/shape_rec02"
+                    android:drawableStart="@drawable/baseline_add_location_alt_24"
+                    android:drawablePadding="10dp"
+                    android:hint="state"
+                    android:inputType="textPostalAddress"
+                    android:layout_weight="1"
+                    android:padding="15dp" />
+
+                <EditText
+                    android:id="@+id/sellercity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/shape_rec02"
+                    android:drawableStart="@drawable/baseline_add_location_alt_24"            android:hint="city"
+                    android:inputType="textPostalAddress"
+                    android:layout_weight="1"
+                    android:padding="15dp" />
+
+
+
+            </LinearLayout>
+
+
+
+
+            <TextView
+                android:id="@+id/sellerdetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sellerphoneEt"
+                android:text="Seller detils"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/selleraddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_below="@id/sellerdetail"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_rec02"
+                android:drawableStart="@drawable/baseline_add_location_alt_24"
+                android:drawablePadding="10dp"
+                android:hint="state"
+                android:inputType="textPostalAddress"
+                android:layout_weight="1"
+                android:padding="15dp" />
+
+
+            <EditText
+                android:id="@+id/sellershopename"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/selleraddress"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_rec02"
+                android:drawableStart="@drawable/baseline_store_24"
+                android:drawablePadding="10dp"
+                android:hint="Shop Name"
+                android:inputType="textEmailAddress"
+                android:padding="15dp" />
+
+            <EditText
+                android:id="@+id/sellerdeliveryfees"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sellershopename"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_rec02"
+                android:drawableStart="@drawable/baseline_attach_money_24"
+                android:drawablePadding="10dp"
+                android:hint="Deliveryfee"
+                android:inputType="textEmailAddress"
+                android:padding="15dp" />
+
+            <TextView
+                android:id="@+id/loginforgot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/sellerphoneEt"
+                android:text="Forgot Password ?   "
+                android:textSize="20dp"
+                android:textStyle="bold"/>
+
+            <Button
+                android:id="@+id/sellerregisterbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
+                android:text="Register"
+                android:minWidth="120dp"
+                android:minHeight="60dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/sellerdeliveryfees"
+                android:layout_marginTop="50dp"/>
+
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
 
 
 
