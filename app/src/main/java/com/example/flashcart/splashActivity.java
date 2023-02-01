@@ -28,14 +28,14 @@ public class splashActivity extends AppCompatActivity {
         logo = findViewById(R.id.logo);
         splashimg = findViewById(R.id.lottie);
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 startActivity(intent);
             }
-        }, 4000);
+        }, 2000);
     }
 
 

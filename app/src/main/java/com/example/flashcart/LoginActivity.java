@@ -1,5 +1,6 @@
 package com.example.flashcart;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -19,6 +20,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //removing appbar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         loginemail = findViewById(R.id.loginEmail);
         loginpassword = findViewById(R.id.loginPass);

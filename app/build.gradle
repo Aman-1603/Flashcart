@@ -9,7 +9,7 @@ android {
     defaultConfig {
         applicationId "com.example.flashcart"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -26,12 +26,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.example.flashcart'
 }
 
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.0'
-    implementation 'com.google.android.material:material:1.7.0'
+    implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-database:20.1.0'
     testImplementation 'junit:junit:4.13.2'
@@ -40,6 +41,7 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:5.2.0'
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
+
     implementation 'com.github.AtifSayings:CircularImageView:1.0.2'
 
 }

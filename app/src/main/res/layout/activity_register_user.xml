@@ -223,16 +223,29 @@
         android:textSize="20dp"
         android:textStyle="bold"/>
 
+
+    <TextView
+        android:id="@+id/areyouseller"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/loginforgot"
+        android:text="Register as a seller account ?   "
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+
     <Button
-        android:id="@+id/loginbtn"
+        android:id="@+id/registerbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
         android:text="Register"
         android:minWidth="120dp"
         android:minHeight="60dp"
+        android:translationY="-10dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/phoneEt"
+        android:layout_below="@id/areyouseller"
         android:layout_marginTop="50dp"/>
 
 

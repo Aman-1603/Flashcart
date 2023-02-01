@@ -3,6 +3,15 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        maven { url='https://jitpack.io'}
+
+
+        jcenter() {
+            content {
+                includeModule("com.theartofdev.edmodo", "android-image-cropper")
+            }
+        }
+
     }
 }
 dependencyResolutionManagement {
@@ -11,6 +20,14 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+
+
+        jcenter() {
+            content {
+                includeModule("com.theartofdev.edmodo", "android-image-cropper")
+            }
+        }
+
     }
 }
 rootProject.name = "Flashcart"

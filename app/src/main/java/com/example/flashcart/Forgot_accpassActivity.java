@@ -10,5 +10,7 @@ public class Forgot_accpassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_accpass);
+
+        //removing app bar
     }
 }
