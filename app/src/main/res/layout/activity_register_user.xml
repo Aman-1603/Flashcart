@@ -10,6 +10,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/toprelative"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@drawable/shape_rec01">
@@ -59,11 +60,21 @@
         android:src="@drawable/baseline_vpn_key_24"/>
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toprelative"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/icontv"
 
         android:background="@drawable/logovirtualshop"/>
 
@@ -72,7 +83,7 @@
         android:id="@+id/profilepic"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_below="@+id/icontv"
+        android:layout_marginTop="60dp"
         app:c_border="true"
         android:translationY="-20dp"
         app:c_border_width="1dp"
@@ -210,7 +221,22 @@
     </LinearLayout>
 
 
-
+    <EditText
+        android:id="@+id/loginaddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/phoneEt"
+        android:background="@drawable/shape_rec02"
+        android:drawableStart="@drawable/baseline_add_location_alt_24"
+        android:drawablePadding="10dp"
+        android:hint="Your complete address"
+        android:inputType="textPostalAddress"
+        android:layout_weight="1"
+        android:padding="15dp" />
 
 
     <TextView
@@ -218,7 +244,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/phoneEt"
+        android:layout_below="@+id/loginaddress"
         android:text="Forgot Password ?   "
         android:textSize="20dp"
         android:textStyle="bold"/>
@@ -247,6 +273,11 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/areyouseller"
         android:layout_marginTop="50dp"/>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 
 

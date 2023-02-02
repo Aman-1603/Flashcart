@@ -2,6 +2,7 @@ package com.example.flashcart;
 
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -142,8 +143,36 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
 
                         if(which == 0){
                           // then camera clicked
+
+                            if(checkCameraPermission()){
+                                //then camera permission allowed
+
+                                pickFromCamera();
+
+
+                            }else{
+                                //camera permission not allowed, request
+
+                                requestcameraPermission();
+
+                            }
+
+
                         }else{
                             //otherwise gallery clicked
+
+                            if(checkStoragePermission()){
+                                //storage permission allowed
+
+                                pickedFromGallery();
+
+                            }else{
+
+                                // storage permission not allowed, requesting
+                                requestStoragePermission();
+
+                            }
+
                         }
 
                     }
@@ -151,7 +180,7 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
                 .show();
     }
 
-    private void clickedFromGallery(){
+    private void pickedFromGallery(){
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent,IMAGE_PICK_GALLERY_CODE);
@@ -170,9 +199,34 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
 
     }
 
-    private void checkStoragePermission(){
-        //remain from here
+    private boolean checkStoragePermission(){
+        boolean result  = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+
+        return result;
     }
+
+    private void requestStoragePermission(){
+        ActivityCompat.requestPermissions(this,storagePermission,STORAGE_REQUEST_CODE);
+    }
+
+
+    private boolean checkCameraPermission(){
+        boolean result  = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
+
+
+        boolean result1 = ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
+
+        return result && result1;
+    }
+
+    private void requestcameraPermission(){
+        ActivityCompat.requestPermissions(this,cameraPermission,CAMERA_REQUEST_CODE);
+    }
+
+
 
     private void detectLocation() {
 
@@ -181,6 +235,41 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,0,this);
 
     }
+
+    private void findAddress(){
+
+        //here we will find address country state and city
+
+        Geocoder geocoder;
+        List<Address> addresses;
+        geocoder = new Geocoder(this, Locale.getDefault());
+
+
+        try {
+
+            addresses = geocoder.getFromLocation(latilude,longitude,1);
+            String address = addresses.get(0).getAddressLine(0);
+            String city = addresses.get(0).getLocality();
+            String state = addresses.get(0).getAdminArea();
+            String country = addresses.get(0).getCountryName();
+
+            //now we will set the address to editbox
+
+            countryET.setText(country);
+            stateET.setText(state);
+            cityET.setText(city);
+            addressET.setText(address);
+
+
+
+
+        }catch (Exception e){
+            Toast.makeText(this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
 
     private boolean checkLocationPermission(){
         boolean result = ContextCompat.checkSelfPermission(this,
@@ -207,39 +296,6 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
 
     }
 
-    private void findAddress(){
-
-        //here we will find address country state and city
-
-        Geocoder geocoder;
-        List<Address> addresses;
-        geocoder = new Geocoder(this, Locale.getDefault());
-
-
-        try {
-
-            addresses = geocoder.getFromLocation(latilude,longitude,1);
-            String address = addresses.get(0).getAddressLine(0);
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-
-            //now we will set the address to editbox
-
-           countryET.setText(country);
-           stateET.setText(state);
-           cityET.setText(city);
-           addressET.setText(address);
-
-
-
-
-        }catch (Exception e){
-           Toast.makeText(this,""+e.getMessage(),Toast.LENGTH_SHORT).show();
-        }
-
-
-    }
 
     @Override
     public void onLocationChanged(@NonNull List<Location> locations) {
@@ -289,6 +345,7 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
                     if(loacationAccepted){
 
                         //permission given
+                        findAddress();
 
                     }else{
 
@@ -300,10 +357,82 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
 
                 }
             }
+            break;
+
+            case CAMERA_REQUEST_CODE:{
+                if(grantResults.length>0){
+                    boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+
+
+                    if(cameraAccepted && storageAccepted){
+
+                        //permission given
+                        pickFromCamera();
+
+                    }else{
+
+                        //permission not given
+                        Toast.makeText(this,"Camera Permission is nessasory before procedding",Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }
+            }
+            break;
+
+
+            case STORAGE_REQUEST_CODE:{
+                if(grantResults.length>0){
+                    boolean storageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+
+
+                    if(storageAccepted){
+
+                        //permission given
+
+                        pickedFromGallery();
+
+
+                    }else{
+
+                        //permission not given
+                        Toast.makeText(this,"Storage Permission is nessasory before procedding",Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                }
+            }
+            break;
+
         }
 
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if(resultCode == RESULT_OK){
+            if(requestCode ==IMAGE_PICK_GALLERY_CODE){
+                image_uri = data.getData();
+
+                //setting image to image box
+
+                sellerprofile.setImageURI(image_uri);
+            }else if(requestCode ==IMAGE_PICK_CAMERA_CODE){
+
+
+                //setting image to image box
+
+                sellerprofile.setImageURI(image_uri);
+            }
+        }
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }
