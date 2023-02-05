@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +22,8 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +33,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import  android.Manifest;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -59,6 +74,9 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
     private LocationManager locationManager;
     private double longitude,latilude;
     private Uri image_uri;
+
+    private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
 
 
 
@@ -93,6 +111,14 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
         locationPermissions = new String[]{Manifest.permission.ACCESS_FINE_LOCATION};
         cameraPermission = new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+
+        //initializing firebase
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Please Wait a movenment ....");
+        progressDialog.setCanceledOnTouchOutside(false);
 
 
 
@@ -142,6 +168,7 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
             public void onClick(View v) {
 
                 //register the user here
+                inputdata();
 
             }
         });
@@ -149,6 +176,205 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
 
 
     }
+
+
+    String inputname,inputemail,inputpass,inputphone,inputshopname,inputcountry,inputstate,inputcity,inputaddress,inputfees;
+    private void inputdata(){
+        inputname = name.getText().toString().trim();
+        inputemail = email.getText().toString().trim();
+        inputpass = pass.getText().toString().trim();
+        inputphone = phone.getText().toString().trim();
+        inputcountry = countryET.getText().toString().trim();
+        inputstate = stateET.getText().toString().trim();
+        inputcity = cityET.getText().toString().trim();
+        inputaddress = addressET.getText().toString().trim();
+
+        if(TextUtils.isEmpty(inputname)){
+            Toast.makeText(this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(inputemail)){
+            Toast.makeText(this, "Please Enter Your Email", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(inputpass)){
+            Toast.makeText(this, "Please Enter Your Pass", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(inputphone)){
+            Toast.makeText(this, "Please Enter Your Phone", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(inputcountry)){
+            Toast.makeText(this, "Please Enter Your Country", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(inputstate)){
+            Toast.makeText(this, "Please Enter Your State", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(inputcity)){
+            Toast.makeText(this, "Please Enter Your City", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(inputaddress)){
+            Toast.makeText(this, "Please Enter Your Address", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        if(latilude == 0.0 || longitude == 0.0){
+            Toast.makeText(this, "Please Click on Gps Button for one Tme", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(!Patterns.EMAIL_ADDRESS.matcher(inputemail).matches()){
+            Toast.makeText(this, "Please Enter Your Valid Email Address", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(inputpass.length() <6){
+            Toast.makeText(this, "Password Should not be less than 6 digit or character", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        //if all condition exist than we will call create acount function for further process
+
+        createAccount();
+
+
+
+    }
+
+
+    private void createAccount(){
+        progressDialog.setMessage("Please Wait while we are creating your Account on our server");
+        progressDialog.show();
+
+        //create a account
+
+        firebaseAuth.createUserWithEmailAndPassword(inputemail,inputpass).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(AuthResult authResult) {
+                        //account created
+                        saveFirebaseData();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //account creation fail
+                        progressDialog.dismiss();
+                        Toast.makeText(RegisterUserActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+
+    private void saveFirebaseData(){
+        progressDialog.setMessage("Saving Account");
+
+        String timestamp = ""+System.currentTimeMillis();
+
+        if(image_uri == null){
+            //then even without image we will save the data to firebase
+
+            HashMap<String, Object> hashMap = new HashMap<>();
+
+            hashMap.put("uid", "" +firebaseAuth.getUid());
+            hashMap.put("email", "" +inputemail);
+            hashMap.put("name","" + inputname);
+            hashMap.put("Phone","" + inputphone);
+            hashMap.put("country","" + inputcountry);
+            hashMap.put("state","" + inputstate);
+            hashMap.put("city","" + inputcity);
+            hashMap.put("address", "" +inputaddress);
+            hashMap.put("longitude", "" +longitude);
+            hashMap.put("latitude", "" +latilude);
+            hashMap.put("timestamp", "" +timestamp);
+            hashMap.put("accountType", "User");
+            hashMap.put("Online",  "true");
+            hashMap.put("profileImage", "");
+
+            //now we will save all this detail in database
+
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+            ref.child(firebaseAuth.getUid()).setValue(hashMap)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            //update database
+                            progressDialog.dismiss();
+                            startActivity(new Intent(RegisterUserActivity.this,MainUserActivity.class));
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //failed to update the database
+                            progressDialog.dismiss();
+                            startActivity(new Intent(RegisterUserActivity.this,MainUserActivity.class));
+                            finish();
+                        }
+                    });
+
+
+        }else{
+            //we will save information with image
+
+            String filePathAndName = "profiles_images/" + ""+ firebaseAuth.getUid();
+
+            StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
+            storageReference.putFile(image_uri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            //here we will try to get url for uploaded image
+                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!uriTask.isSuccessful());
+                            Uri downloadImageUri = uriTask.getResult();
+
+                            if(uriTask.isSuccessful()){
+
+                                //save actual data
+                                HashMap<String, Object> hashMap = new HashMap<>();
+
+                                hashMap.put("uid", "" +firebaseAuth.getUid());
+                                hashMap.put("email", "" +inputemail);
+                                hashMap.put("name","" + inputname);
+                                hashMap.put("Phone","" + inputphone);
+                                hashMap.put("country","" + inputcountry);
+                                hashMap.put("state","" + inputstate);
+                                hashMap.put("city","" + inputcity);
+                                hashMap.put("address", "" +inputaddress);
+                                hashMap.put("longitude", "" +longitude);
+                                hashMap.put("latitude", "" +latilude);
+                                hashMap.put("timestamp", "" +timestamp);
+                                hashMap.put("accountType", "User");
+                                hashMap.put("Online",  "true");
+                                hashMap.put("profileImage", ""+downloadImageUri); //url of upoaded image
+
+                            }
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            //fail to get image url
+                            progressDialog.dismiss();
+                            Toast.makeText(RegisterUserActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+
+        }
+    }
+
+
+
+
 
     private void showImagePickDialoge(){
         String[] option = {"Camera","Gallery"};

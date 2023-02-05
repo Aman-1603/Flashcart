@@ -67,7 +67,7 @@
 
 
     <Button
-        android:id="@+id/loginbtn"
+        android:id="@+id/forgotbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/TextAppearance.AppCompat.Widget.Button.Colored"
