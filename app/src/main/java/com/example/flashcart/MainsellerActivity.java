@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.flashcart.profilePage.ProfileActivitySeller;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,7 +23,7 @@ public class MainsellerActivity extends AppCompatActivity {
 
 
     private TextView nameTV;
-    private ImageButton logoutbtn;
+     ImageButton logoutbtn,profile;
 
     private FirebaseAuth firebaseAuth;
 
@@ -34,13 +36,16 @@ public class MainsellerActivity extends AppCompatActivity {
         nameTV = findViewById(R.id.nametv);
         logoutbtn = findViewById(R.id.logoutbtn);
 
+
         firebaseAuth = FirebaseAuth.getInstance();
         CheckUser();
 
         logoutbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CheckUser();
+
+                //CheckUser();
+                startActivity(new Intent(MainsellerActivity.this, ProfileActivitySeller.class));
             }
         });
 

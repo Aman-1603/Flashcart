@@ -19,6 +19,12 @@
         android:theme="@style/Theme.Flashcart"
         tools:targetApi="31">
         <activity
+            android:name=".profilePage.ProfileActivitySeller"
+            android:exported="false" />
+        <activity
+            android:name=".profilePage.ProfileActivityUser"
+            android:exported="false" />
+        <activity
             android:name=".MainUserActivity"
             android:exported="false" />
         <activity

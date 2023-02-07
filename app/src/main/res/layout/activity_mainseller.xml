@@ -28,6 +28,12 @@
             android:background="@drawable/baseline_power_settings_new_24"
             android:layout_alignParentEnd="true" />
 
+        <ImageButton
+            android:id="@+id/profileTv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/baseline_power_settings_new_24" />
+
     </RelativeLayout>
 
 </RelativeLayout>
