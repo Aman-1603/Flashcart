@@ -2,6 +2,7 @@ package com.example.flashcart.profilePage;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
@@ -88,6 +89,9 @@ public class ProfileActivitySeller extends AppCompatActivity implements Location
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_seller);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
 
         sellerbackbtn = findViewById(R.id.sellerbackbtn);

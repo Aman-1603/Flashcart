@@ -1,6 +1,7 @@
 package com.example.flashcart;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -22,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class MainsellerActivity extends AppCompatActivity {
 
 
-    private TextView nameTV;
+    private TextView nameTV,shopnameTV,emailTV;
      ImageButton logoutbtn,profile;
 
     private FirebaseAuth firebaseAuth;
@@ -32,8 +33,13 @@ public class MainsellerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainseller);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
 
         nameTV = findViewById(R.id.nametv);
+        shopnameTV = findViewById(R.id.shopanmetv);
+        emailTV = findViewById(R.id.emailtv);
         logoutbtn = findViewById(R.id.logoutbtn);
 
 
@@ -71,8 +77,13 @@ public class MainsellerActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                         for(DataSnapshot ds : datasnapshot.getChildren()){
                             String name = ""+ds.child("name").getValue();
+                            String shopname = ""+ds.child("shopName").getValue();
+                            String email = ""+ds.child("email").getValue();
+
 
                             nameTV.setText(name);
+                            shopnameTV.setText(shopname);
+                            emailTV.setText(email);
                         }
                     }
 

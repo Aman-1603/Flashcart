@@ -2,6 +2,7 @@ package com.example.flashcart.profilePage;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
@@ -86,6 +87,9 @@ public class ProfileActivityUser extends AppCompatActivity  implements LocationL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profileuser);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
 
         userbackbtn = findViewById(R.id.loginbackbtn);
