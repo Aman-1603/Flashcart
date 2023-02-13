@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainsellerActivity">
+
+    <RelativeLayout
+        android:id="@+id/layouttop"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:padding="10dp"
+        android:background="@drawable/shape_rec03">
+
+
+        <ImageButton
+            android:id="@+id/logoutbtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/baseline_power_settings_new_24"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            android:id="@+id/logouteditprofile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toStartOf="@id/logoutbtn"
+            android:background="@drawable/baseline_edit_24"/>
+
+        <ImageButton
+            android:id="@+id/logoutaddproducts"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/baseline_add_shopping_cart_24"
+            android:layout_toStartOf="@id/logouteditprofile"/>
+
+
+        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+            android:id="@+id/profiletv"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:c_border="true"
+            android:layout_marginEnd="10dp"
+            app:c_border_color="@color/white"
+            android:src="@drawable/baseline_store_24"/>
+
+
+        <TextView
+            android:id="@+id/nametv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_toEndOf="@+id/profiletv"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/shopanmetv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shop Name"
+            android:layout_below="@+id/nametv"
+            android:layout_toEndOf="@+id/profiletv"
+            android:textColor="@color/white"
+            android:textSize="15dp"/>
+        <TextView
+            android:id="@+id/emailtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:layout_below="@+id/shopanmetv"
+            android:layout_toEndOf="@+id/profiletv"
+            android:textColor="@color/white"
+            android:textSize="15dp"/>
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/Frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layouttop"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+
+
+</RelativeLayout>

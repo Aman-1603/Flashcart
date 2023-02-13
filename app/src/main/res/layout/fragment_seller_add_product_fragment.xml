@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".SellerPage.SellerAddProduct_fragment">
+
+    <RelativeLayout
+        android:id="@+id/layouttop"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding="10dp"
+        android:background="@drawable/shape_rec03">
+
+
+        <ImageButton
+            android:id="@+id/logoutaddproducts"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/baseline_arrow_back_ios_24"/>
+
+
+
+
+        <TextView
+            android:id="@+id/addproduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Product"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+            android:id="@+id/productImgEt"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:c_border="true"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            app:c_border_color="#7C7777"
+            android:src="@drawable/baseline_store_24"/>
+
+        <EditText
+            android:id="@+id/titleET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/productImgEt"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/shape_rec02"
+            android:drawableStart="@drawable/baseline_title_24"
+            android:drawablePadding="10dp"
+            android:hint="Title of your product"
+            android:inputType="textCapSentences|textMultiLine"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/descriptionEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_rec02"
+            android:drawableStart="@drawable/baseline_title_24"
+            android:padding="10dp"
+            android:hint="Description in detail"
+            android:inputType="textCapSentences|textMultiLine"
+            android:drawablePadding="10dp"
+            android:layout_below="@id/titleET"/>
+
+        <EditText
+            android:id="@+id/categoryEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_rec02"
+            android:drawableStart="@drawable/baseline_grid_view_24"
+            android:padding="10dp"
+            android:hint="Category"
+            android:inputType="textCapSentences|textMultiLine"
+            android:drawablePadding="10dp"
+            android:layout_below="@id/descriptionEt"/>
+
+
+        <EditText
+            android:id="@+id/QuantityEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_rec02"
+            android:drawableStart="@drawable/baseline_shopping_cart_24"
+            android:padding="10dp"
+            android:hint="Quantity"
+            android:inputType="textCapWords"
+            android:drawablePadding="10dp"
+            android:layout_below="@id/categoryEt"/>
+
+        <EditText
+            android:id="@+id/priceEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/QuantityEt"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/shape_rec02"
+            android:drawableStart="@drawable/baseline_shopping_cart_24"
+            android:drawablePadding="10dp"
+            android:hint="Price"
+            android:inputType="numberDecimal"
+            android:padding="10dp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/discountswitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/priceEt"
+            android:layout_margin="5dp"
+            android:text="Discount"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/discountPriceEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/discountswitch"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/shape_rec02"
+            android:drawableStart="@drawable/baseline_shopping_cart_24"
+            android:drawablePadding="10dp"
+            android:hint="Discount"
+            android:inputType="numberDecimal"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/discountNoteEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/discountPriceEt"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/shape_rec02"
+            android:drawableStart="@drawable/baseline_shopping_cart_24"
+            android:drawablePadding="10dp"
+            android:hint="Discount Notes Eg 10% off Etc...."
+            android:inputType="textCapSentences"
+            android:padding="10dp" />
+
+
+
+        <Button
+            android:id="@+id/addproductbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/discountNoteEt"
+            android:layout_centerHorizontal="true"
+            android:text="Add Products"
+            android:minWidth="150dp"
+            android:layout_marginTop="10dp"/>
+
+        
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,32 +1,22 @@
 package com.example.flashcart;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
-import com.example.flashcart.profilePage.ProfileActivitySeller;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.flashcart.SellerPage.SellerAddProduct_fragment;
+import com.example.flashcart.SellerPage.SellerHomePage1_fragment;
+import com.example.flashcart.databinding.ActivityMainUserBinding;
+import com.example.flashcart.databinding.ActivityMainsellerBinding;
 
 public class MainsellerActivity extends AppCompatActivity {
 
 
-    private TextView nameTV,shopnameTV,emailTV;
-     ImageButton logoutbtn,profile;
-
-    private FirebaseAuth firebaseAuth;
+    ActivityMainsellerBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,64 +26,55 @@ public class MainsellerActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        binding = ActivityMainsellerBinding.inflate(getLayoutInflater());
 
-        nameTV = findViewById(R.id.nametv);
-        shopnameTV = findViewById(R.id.shopanmetv);
-        emailTV = findViewById(R.id.emailtv);
-        logoutbtn = findViewById(R.id.logoutbtn);
+        setContentView(binding.getRoot());
 
+        //bydefault fragment would be home page of use
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        CheckUser();
+        replaceFragment(new SellerHomePage1_fragment());
 
-        logoutbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.bottomnavigationBarseller.setOnItemSelectedListener(item -> {
 
-                //CheckUser();
-                startActivity(new Intent(MainsellerActivity.this, ProfileActivitySeller.class));
+            switch (item.getItemId()){
+                case R.id.Home:
+                    replaceFragment(new SellerHomePage1_fragment());
+                    break;
+                case R.id.Products:
+                    replaceFragment(new SellerAddProduct_fragment());
+
+                    break;
+                case R.id.Notification:
+                    break;
+                case R.id.Orders:
+                    break;
+                case R.id.Account:
+                    break;
+
             }
+            return true;
         });
 
+//        logoutbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                //CheckUser();
+//                startActivity(new Intent(MainsellerActivity.this, ProfileActivitySeller.class));
+//            }
+//        });
+
 
 
     }
 
-    private void CheckUser(){
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        if(user == null){
-            startActivity(new Intent(MainsellerActivity.this,LoginActivity.class));
-            finish();
-        }else{
-            loadMyInfo();
-        }
+
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.Frame_layout,fragment);
+        fragmentTransaction.commit();
     }
-
-    private void loadMyInfo(){
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
-        ref.orderByChild("uid").equalTo(firebaseAuth.getUid())
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        for(DataSnapshot ds : datasnapshot.getChildren()){
-                            String name = ""+ds.child("name").getValue();
-                            String shopname = ""+ds.child("shopName").getValue();
-                            String email = ""+ds.child("email").getValue();
-
-
-                            nameTV.setText(name);
-                            shopnameTV.setText(shopname);
-                            emailTV.setText(email);
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-    }
-
 
 
 }
