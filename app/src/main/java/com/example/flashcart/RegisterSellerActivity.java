@@ -217,10 +217,10 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
         }
 
 
-        if(latilude == 0.0 || longitude == 0.0){
-            Toast.makeText(this, "Please Click on Gps Button for one Tme", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if(latilude == 0.0 || longitude == 0.0){
+//            Toast.makeText(this, "Please Click on Gps Button for one Tme", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(inputemail).matches()){
             Toast.makeText(this, "Please Enter Your Valid Email Address", Toast.LENGTH_SHORT).show();

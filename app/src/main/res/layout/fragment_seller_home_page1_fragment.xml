@@ -84,14 +84,67 @@
 
 
 
-    <FrameLayout
-        android:id="@+id/Frame_layout"
+<!--    <FrameLayout-->
+<!--        android:id="@+id/Frame_layout"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/layouttop"-->
+<!--        app:layout_constraintVertical_bias="0.0" >-->
+<!--        -->
+<!--        -->
+
+
+
+<!--    </FrameLayout>-->
+
+
+<RelativeLayout
+    android:id="@+id/showproductlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@id/layouttop">
+
+    <LinearLayout
+        android:id="@+id/categoryLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categories"
+            android:textStyle="bold"
+            android:textSize="30dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/showsellerproductLayout"
+        android:layout_below="@id/categoryLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/layouttop"
-        app:layout_constraintVertical_bias="0.0" />
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Products"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclarItem"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
 
 </RelativeLayout>
