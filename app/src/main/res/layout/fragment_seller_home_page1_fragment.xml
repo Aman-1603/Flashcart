@@ -107,15 +107,31 @@
     <LinearLayout
         android:id="@+id/categoryLayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/searchproductEt"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:text="Categories"
-            android:textStyle="bold"
-            android:textSize="30dp"/>
+            android:layout_margin="5dp"
+            android:background="@drawable/shape_rec02"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:drawablePadding="10dp"
+            android:padding="15dp"
+            android:hint="Search here..."/>
+
+<!--        filter-->
+
+        <ImageButton
+            android:id="@+id/filterproductBtn"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@null"
+            android:scaleType="fitXY"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/baseline_filter_alt_24"/>
 
     </LinearLayout>
 
@@ -134,11 +150,21 @@
             android:textSize="30dp"
             android:textStyle="bold"/>
 
+        <TextView
+            android:id="@+id/flterproductTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Showing All"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclarItem"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/row_product_seller">
 
         </androidx.recyclerview.widget.RecyclerView>
 
