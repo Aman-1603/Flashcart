@@ -90,7 +90,7 @@ public class SellerAddProduct_fragment extends Fragment {
         discountnoteEt = view.findViewById(R.id.discountNoteEt);
         switchdisacount = view.findViewById(R.id.discountswitch);
         productIconTv = view.findViewById(R.id.productImgEt);
-        addproductbtn = view.findViewById(R.id.discountswitch);
+        addproductbtn = view.findViewById(R.id.addproductbtn);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -160,6 +160,9 @@ public class SellerAddProduct_fragment extends Fragment {
         addproductbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+
                 //flow of data
                 //1->input data
                 //2->validate data
