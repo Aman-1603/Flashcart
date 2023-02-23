@@ -14,6 +14,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -48,12 +50,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
-public class SellerEditProduct_fragmnet extends Fragment {
+public class SellerEditProduct_fragmnet extends AppCompatActivity {
 
 
-    public SellerEditProduct_fragmnet() {
-        // Required empty public constructor
-    }
+
 
      String productId;
 
@@ -80,28 +80,30 @@ public class SellerEditProduct_fragmnet extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_seller_edit_product_fragmnet, container, false);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_seller_edit_product_fragmnet);
 
-        titleproductEt = view.findViewById(R.id.titleET);
-        descriptionEt = view.findViewById(R.id.descriptionEt);
-        categoryEt = view.findViewById(R.id.categoryEt);
-        quantityEt = view.findViewById(R.id.QuantityEt);
-        priceEt = view.findViewById(R.id.priceEt);
-        discountEt = view.findViewById(R.id.discountPriceEt);
-        discountnoteEt = view.findViewById(R.id.discountNoteEt);
-        productIconTv = view.findViewById(R.id.productImgEt);
-        editproductbtn = view.findViewById(R.id.discountswitch);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
+        titleproductEt = findViewById(R.id.titleET);
+        descriptionEt = findViewById(R.id.descriptionEt);
+        categoryEt = findViewById(R.id.categoryEt);
+        quantityEt = findViewById(R.id.QuantityEt);
+        priceEt = findViewById(R.id.priceEt);
+        discountEt = findViewById(R.id.discountPriceEt);
+        discountnoteEt = findViewById(R.id.discountNoteEt);
+        productIconTv = findViewById(R.id.productImgEt);
+        editproductbtn = findViewById(R.id.addproductbtn);
 
 
-        productId = getActivity().getIntent().getStringExtra("ProductId");
+        productId = getIntent().getStringExtra("ProductId");
         firebaseAuth = FirebaseAuth.getInstance();
 
         loadproductDetails();
 
-        progressDialog = new ProgressDialog(getContext());
+        progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please Wait a movenment ....");
         progressDialog.setCanceledOnTouchOutside(false);
 
@@ -113,23 +115,23 @@ public class SellerEditProduct_fragmnet extends Fragment {
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 
-
-        switchdisacount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-
-                    //if checked than show these box
-                    discountEt.setVisibility(View.VISIBLE);
-                    discountnoteEt.setVisibility(View.VISIBLE);
-                }else{
-                    //if not checked then we will hide these two edittext
-                    discountEt.setVisibility(View.GONE);
-                    discountnoteEt.setVisibility(View.GONE);
-
-                }
-            }
-        });
+//
+//        switchdisacount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//
+//                    //if checked than show these box
+//                    discountEt.setVisibility(View.VISIBLE);
+//                    discountnoteEt.setVisibility(View.VISIBLE);
+//                }else{
+//                    //if not checked then we will hide these two edittext
+//                    discountEt.setVisibility(View.GONE);
+//                    discountnoteEt.setVisibility(View.GONE);
+//
+//                }
+//            }
+//        });
 
 
         productIconTv.setOnClickListener(new View.OnClickListener() {
@@ -151,7 +153,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SellerEditProduct_fragmnet.this, "Hello", Toast.LENGTH_SHORT).show();
 
                 //flow of data
                 //1->input data
@@ -163,8 +165,6 @@ public class SellerEditProduct_fragmnet extends Fragment {
         });
 
 
-
-        return view;
     }
 
     private void loadproductDetails() {
@@ -190,17 +190,18 @@ public class SellerEditProduct_fragmnet extends Fragment {
 
                         //now we will set data
 
-                        if (ProductDiscountAvailable.equals("true")){
-                            switchdisacount.setChecked(true);
-                            discountEt.setVisibility(View.VISIBLE);
-                            discountnoteEt.setVisibility(View.VISIBLE);
-
-
-                        }else{
-                            switchdisacount.setChecked(false);
-                            discountEt.setVisibility(View.GONE);
-                            discountnoteEt.setVisibility(View.GONE);
-                        }
+//                        if (ProductDiscountAvailable.equals("true")){
+//                            switchdisacount.setChecked(true);
+//                            discountEt.setVisibility(View.VISIBLE);
+//                            discountnoteEt.setVisibility(View.VISIBLE);
+//
+//
+//                        }
+//                        if (ProductDiscountAvailable.equals("false")){
+//                            switchdisacount.setChecked(false);
+//                            discountEt.setVisibility(View.GONE);
+//                            discountnoteEt.setVisibility(View.GONE);
+//                        }
 
 
                         titleproductEt.setText(ProductTitle);
@@ -242,26 +243,26 @@ public class SellerEditProduct_fragmnet extends Fragment {
         ProductCategory = categoryEt.getText().toString().trim();
         ProductQuantity = quantityEt.getText().toString().trim();
         ProductOrignalPrice = priceEt.getText().toString().trim();
-        discountAvailable = switchdisacount.isChecked();
+//        discountAvailable = switchdisacount.isChecked();
 
         if(TextUtils.isEmpty(ProductTitle)){
-            Toast.makeText(getContext(), "Please Enter Product Title", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SellerEditProduct_fragmnet.this, "Please Enter Product Title", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(ProductDescription)){
-            Toast.makeText(getContext(), "Please Enter Product Description", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SellerEditProduct_fragmnet.this, "Please Enter Product Description", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(ProductCategory)){
-            Toast.makeText(getContext(), "Please Enter Product Category", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SellerEditProduct_fragmnet.this, "Please Enter Product Category", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(ProductQuantity)){
-            Toast.makeText(getContext(), "Please Enter Product Quantity", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SellerEditProduct_fragmnet.this, "Please Enter Product Quantity", Toast.LENGTH_SHORT).show();
             return;
         }
         if(TextUtils.isEmpty(ProductOrignalPrice)){
-            Toast.makeText(getContext(), "Please Enter Product Orignal Price", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SellerEditProduct_fragmnet.this, "Please Enter Product Orignal Price", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -271,11 +272,11 @@ public class SellerEditProduct_fragmnet extends Fragment {
 
 
             if(TextUtils.isEmpty(ProductDiscount)){
-                Toast.makeText(getContext(), "Please Enter Product Discount Amount", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SellerEditProduct_fragmnet.this, "Please Enter Product Discount Amount", Toast.LENGTH_SHORT).show();
                 return;
             }
             if(TextUtils.isEmpty(ProductDiscountNote)){
-                Toast.makeText(getContext(), "Please Enter Product Discount Note", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SellerEditProduct_fragmnet.this, "Please Enter Product Discount Note", Toast.LENGTH_SHORT).show();
                 return;
             }
         }else {
@@ -320,7 +321,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
                         public void onSuccess(Void unused) {
 
                             progressDialog.dismiss();
-                            Toast.makeText(getContext(), "Product Updated Sucessfully", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SellerEditProduct_fragmnet.this, "Product Updated Sucessfully", Toast.LENGTH_SHORT).show();
 
                         }
                     })
@@ -329,7 +330,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
                         public void onFailure(@NonNull Exception e) {
 
                             progressDialog.dismiss();
-                            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SellerEditProduct_fragmnet.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -374,7 +375,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
                                             public void onSuccess(Void unused) {
 
                                                 progressDialog.dismiss();
-                                                Toast.makeText(getContext(), "Product Updated Sucessfully", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SellerEditProduct_fragmnet.this, "Product Updated Sucessfully", Toast.LENGTH_SHORT).show();
 
                                             }
                                         })
@@ -383,7 +384,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
                                             public void onFailure(@NonNull Exception e) {
 
                                                 progressDialog.dismiss();
-                                                Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(SellerEditProduct_fragmnet.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
 
                                             }
                                         });
@@ -401,7 +402,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
 
 
                             progressDialog.dismiss();
-                            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SellerEditProduct_fragmnet.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
 
                         }
                     });
@@ -413,7 +414,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
 
     private void CategoryDialog() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Product Category")
                 .setItems(Constants.productcategories, new DialogInterface.OnClickListener() {
                     @Override
@@ -432,7 +433,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
         String[] option = {"Camera","Gallery"};
 
         //show dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pick Your Image")
                 .setItems(option, new DialogInterface.OnClickListener() {
                     @Override
@@ -489,7 +490,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
         contentValues.put(MediaStore.Images.Media.TITLE, "Temp_Image Title");
         contentValues.put(MediaStore.Images.Media.DESCRIPTION, "Temp_Image Descritption");
 
-        image_uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+        image_uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
         Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,image_uri);
         startActivityForResult(intent, IMAGE_PICK_CAMERA_CODE);
@@ -498,30 +499,30 @@ public class SellerEditProduct_fragmnet extends Fragment {
     }
 
     private boolean checkStoragePermission(){
-        boolean result  = ContextCompat.checkSelfPermission(getContext(),
+        boolean result  = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
 
         return result;
     }
 
     private void requestStoragePermission(){
-        ActivityCompat.requestPermissions(getActivity(),storagePermission,STORAGE_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this,storagePermission,STORAGE_REQUEST_CODE);
     }
 
 
     private boolean checkCameraPermission(){
-        boolean result  = ContextCompat.checkSelfPermission(getContext(),
+        boolean result  = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA) == (PackageManager.PERMISSION_GRANTED);
 
 
-        boolean result1 = ContextCompat.checkSelfPermission(getContext(),
+        boolean result1 = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE) == (PackageManager.PERMISSION_GRANTED);
 
         return result && result1;
     }
 
     private void requestcameraPermission(){
-        ActivityCompat.requestPermissions(getActivity(),cameraPermission,CAMERA_REQUEST_CODE);
+        ActivityCompat.requestPermissions(this,cameraPermission,CAMERA_REQUEST_CODE);
     }
 
 
@@ -545,7 +546,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
                     }else{
 
                         //permission not given
-                        Toast.makeText(getContext(),"Camera Permission is nessasory before procedding",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,"Camera Permission is nessasory before procedding",Toast.LENGTH_SHORT).show();
 
                     }
 
@@ -570,7 +571,7 @@ public class SellerEditProduct_fragmnet extends Fragment {
                     }else{
 
                         //permission not given
-                        Toast.makeText(getContext(),"Storage Permission is nessasory before procedding",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,"Storage Permission is nessasory before procedding",Toast.LENGTH_SHORT).show();
 
                     }
 

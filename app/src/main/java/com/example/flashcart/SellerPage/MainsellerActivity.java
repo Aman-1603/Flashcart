@@ -1,4 +1,4 @@
-package com.example.flashcart;
+package com.example.flashcart.SellerPage;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -6,8 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.flashcart.Forgot_accpassActivity;
+import com.example.flashcart.LoginActivity;
+import com.example.flashcart.R;
 import com.example.flashcart.SellerPage.SellerAddProduct_fragment;
 import com.example.flashcart.SellerPage.SellerHomePage1_fragment;
 import com.example.flashcart.databinding.ActivityMainUserBinding;
@@ -44,10 +48,17 @@ public class MainsellerActivity extends AppCompatActivity {
                     replaceFragment(new SellerAddProduct_fragment());
 
                     break;
-                case R.id.Notification:
-                    break;
+//                case R.id.Notification:
+//                    break;
                 case R.id.Orders:
                     break;
+
+                case R.id.Banner:
+
+                    startActivity(new Intent(MainsellerActivity.this, SellerBannerMainPage.class));
+
+                    break;
+
                 case R.id.Account:
                     break;
 

@@ -1,4 +1,4 @@
-package com.example.flashcart.fragments;
+package com.example.flashcart.SellerPage;
 
 import android.os.Bundle;
 
@@ -10,17 +10,22 @@ import android.view.ViewGroup;
 
 import com.example.flashcart.R;
 
-public class UserHomeFragment extends Fragment {
+public class SellerBannerAll_Image extends Fragment {
 
 
-    public UserHomeFragment() {
+    public SellerBannerAll_Image() {
         // Required empty public constructor
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_seller_banner_all__image, container, false);
+
+
+
+        return view;
     }
 }

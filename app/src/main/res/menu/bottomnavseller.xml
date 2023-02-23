@@ -9,15 +9,21 @@
         android:id="@+id/Products"
         android:icon="@drawable/baseline_add_shopping_cart_24"
         android:title="Products" />
-    <item
-        android:id="@+id/Notification"
-        android:icon="@drawable/baseline_notifications_active_24"
-        android:title="Notification" />
+<!--    <item-->
+<!--        android:id="@+id/Notification"-->
+<!--        android:icon="@drawable/baseline_notifications_active_24"-->
+<!--        android:title="Notification" />-->
 
     <item
         android:id="@+id/Orders"
         android:icon="@drawable/baseline_shopping_cart_24"
         android:title="Orders" />
+
+
+    <item
+        android:id="@+id/Banner"
+        android:icon="@drawable/baseline_cloud_upload_24"
+        android:title="Banner" />
 
     <item
         android:id="@+id/Account"

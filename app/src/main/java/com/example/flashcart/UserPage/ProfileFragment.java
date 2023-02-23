@@ -1,4 +1,4 @@
-package com.example.flashcart.fragments;
+package com.example.flashcart.UserPage;
 
 import android.os.Bundle;
 

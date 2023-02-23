@@ -29,13 +29,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.flashcart.LoginActivity;
-import com.example.flashcart.MainsellerActivity;
 import com.example.flashcart.R;
-import com.example.flashcart.RegisterSellerActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;

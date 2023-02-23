@@ -1,19 +1,15 @@
 package com.example.flashcart;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.loader.app.LoaderManager;
 
 import  android.Manifest;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -35,27 +31,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.flashcart.SellerPage.MainsellerActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
-import java.util.regex.Pattern;
 
 public class RegisterSellerActivity extends AppCompatActivity implements LocationListener {
 
@@ -302,7 +294,7 @@ public class RegisterSellerActivity extends AppCompatActivity implements Locatio
                         public void onSuccess(Void unused) {
                             //update database
                             progressDialog.dismiss();
-                            startActivity(new Intent(RegisterSellerActivity.this,MainsellerActivity.class));
+                            startActivity(new Intent(RegisterSellerActivity.this, MainsellerActivity.class));
                             finish();
                         }
                     })

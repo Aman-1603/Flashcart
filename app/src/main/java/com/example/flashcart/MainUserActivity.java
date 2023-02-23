@@ -1,6 +1,7 @@
 package com.example.flashcart;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -8,17 +9,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.flashcart.databinding.ActivityMainBinding;
 import com.example.flashcart.databinding.ActivityMainUserBinding;
-import com.example.flashcart.fragments.ProfileFragment;
-import com.example.flashcart.fragments.UserHomeFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationItemView;
-import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
-import com.google.firebase.auth.AuthResult;
+import com.example.flashcart.UserPage.ProfileFragment;
+import com.example.flashcart.UserPage.UserHomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,10 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-
 
 
 public class MainUserActivity extends AppCompatActivity {
@@ -46,6 +38,9 @@ public class MainUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         binding = ActivityMainUserBinding.inflate(getLayoutInflater());
 

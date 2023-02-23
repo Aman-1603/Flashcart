@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.flashcart.SellerPage.MainsellerActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -176,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(accountType.equals("seller")){
                                 //transfer user to seller page
                                 progressDialog.dismiss();
-                                startActivity(new Intent(LoginActivity.this,MainsellerActivity.class));
+                                startActivity(new Intent(LoginActivity.this, MainsellerActivity.class));
                                 finish();
 
                             }else if(accountType.equals("User")){

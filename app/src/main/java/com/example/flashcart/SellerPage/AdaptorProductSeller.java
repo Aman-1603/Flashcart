@@ -16,11 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.airbnb.lottie.L;
 import com.example.flashcart.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -200,11 +197,9 @@ public class AdaptorProductSeller extends RecyclerView.Adapter<AdaptorProductSel
             public void onClick(View v) {
 
                 bottomSheetDialog.dismiss();
-                Intent intent = new Intent(context,SellerEditProduct_fragmnet.class);
+                Intent intent = new Intent(context, SellerEditProduct_fragmnet.class);
                 intent.putExtra("ProductId",id);
                 context.startActivity(intent);
-
-
 
             }
         });
