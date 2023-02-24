@@ -1,4 +1,4 @@
-package com.example.flashcart.SellerPage;
+package com.example.flashcart.Adaptor;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,6 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashcart.R;
+import com.example.flashcart.SellerPage.FilterProduct;
+import com.example.flashcart.SellerPage.ModelProduct;
+import com.example.flashcart.SellerPage.SellerEditProduct_fragmnet;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;

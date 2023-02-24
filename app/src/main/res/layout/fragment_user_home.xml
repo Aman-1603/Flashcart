@@ -41,6 +41,12 @@
 
     </RelativeLayout>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layouttop"
+        app:cardCornerRadius="10dp">
+
     <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/image_slider"
         android:layout_width="match_parent"
@@ -50,6 +56,32 @@
         app:iss_delay="1000"
         app:iss_period="2000"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="250dp"
+            android:orientation="horizontal">
+
+            <!-- multiple button views to show a
+                  scrollable horizontal list -->
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rec_home_category"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/row_user_homecategorylist">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
 
 

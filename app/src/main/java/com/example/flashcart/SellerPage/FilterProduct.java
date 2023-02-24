@@ -2,6 +2,8 @@ package com.example.flashcart.SellerPage;
 
 import android.widget.Filter;
 
+import com.example.flashcart.Adaptor.AdaptorProductSeller;
+
 import java.util.ArrayList;
 
 public class FilterProduct extends Filter {

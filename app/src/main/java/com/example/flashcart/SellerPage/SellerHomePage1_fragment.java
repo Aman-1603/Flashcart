@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.flashcart.Adaptor.AdaptorProductSeller;
 import com.example.flashcart.LoginActivity;
 import com.example.flashcart.R;
 import com.example.flashcart.categorylist.Constants;
