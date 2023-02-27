@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashcart.R;
 import com.example.flashcart.SellerPage.FilterProduct;
-import com.example.flashcart.SellerPage.ModelProduct;
+import com.example.flashcart.Model.ModelProduct;
 import com.example.flashcart.SellerPage.SellerEditProduct_fragmnet;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

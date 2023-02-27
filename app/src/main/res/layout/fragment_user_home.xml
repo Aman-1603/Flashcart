@@ -42,6 +42,7 @@
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/layouttop"
@@ -56,32 +57,172 @@
         app:iss_delay="1000"
         app:iss_period="2000"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:layout_marginTop="250dp"
-            android:orientation="horizontal">
 
-            <!-- multiple button views to show a
-                  scrollable horizontal list -->
-
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rec_home_category"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/row_user_homecategorylist">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
-
-        </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
+
+
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_below="@id/cardview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:baselineAligned="false">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:id="@+id/category_electronic_accessories"
+            android:padding="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_shopping_cart_24"
+                android:layout_above="@+id/category_electronic_accessories_1"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/category_electronic_accessories_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="electronic"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:id="@+id/category_automotive"
+            android:padding="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_shopping_cart_24"
+                android:layout_above="@+id/category_automotive_1"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/category_automotive_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="automotive"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:id="@+id/category_electronic_devices"
+            android:padding="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_shopping_cart_24"
+                android:layout_above="@+id/category_electronic_devices_1"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/category_electronic_devices_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="electronicDevices"
+                android:textAlignment="center"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_below="@id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:baselineAligned="false">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:id="@+id/category_home_lifestyle"
+            android:padding="5dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_shopping_cart_24"
+                android:layout_above="@+id/category_home_lifestyle_1"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/category_home_lifestyle_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="homeLifestyle"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:id="@+id/category_home_appliance"
+            android:padding="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_shopping_cart_24"
+                android:layout_above="@+id/category_home_appliance_1"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/category_home_appliance_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="homeAppliance"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:id="@+id/category_health_and_beauty"
+            android:padding="5dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_shopping_cart_24"
+                android:layout_above="@+id/category_health_and_beauty_1"
+                android:layout_centerHorizontal="true"/>
+            <TextView
+                android:id="@+id/category_health_and_beauty_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="healthBeauty"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:textAlignment="center"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

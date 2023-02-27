@@ -3,6 +3,7 @@ package com.example.flashcart.SellerPage;
 import android.widget.Filter;
 
 import com.example.flashcart.Adaptor.AdaptorProductSeller;
+import com.example.flashcart.Model.ModelProduct;
 
 import java.util.ArrayList;
 

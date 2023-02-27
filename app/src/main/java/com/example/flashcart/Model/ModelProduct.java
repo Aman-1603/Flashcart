@@ -1,4 +1,4 @@
-package com.example.flashcart.SellerPage;
+package com.example.flashcart.Model;
 
 public class ModelProduct {
     private String ProductId, ProductTitle,ProductDescription,ProductCategory,ProductQuantity,

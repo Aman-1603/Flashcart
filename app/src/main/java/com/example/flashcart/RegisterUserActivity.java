@@ -33,6 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import  android.Manifest;
 
+import com.example.flashcart.UserPage.MainUserActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -306,7 +307,7 @@ public class RegisterUserActivity extends AppCompatActivity implements LocationL
                         public void onSuccess(Void unused) {
                             //update database
                             progressDialog.dismiss();
-                            startActivity(new Intent(RegisterUserActivity.this,MainUserActivity.class));
+                            startActivity(new Intent(RegisterUserActivity.this, MainUserActivity.class));
                             finish();
                         }
                     })

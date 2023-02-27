@@ -1,4 +1,4 @@
-package com.example.flashcart;
+package com.example.flashcart.UserPage;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -12,9 +12,9 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.flashcart.LoginActivity;
+import com.example.flashcart.R;
 import com.example.flashcart.databinding.ActivityMainUserBinding;
-import com.example.flashcart.UserPage.ProfileFragment;
-import com.example.flashcart.UserPage.UserHomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -57,6 +57,9 @@ public class MainUserActivity extends AppCompatActivity {
                     replaceFragment(new UserHomeFragment());
                     break;
                 case R.id.Category:
+
+                    replaceFragment(new UserShowShop());
+
                     break;
                 case R.id.Notification:
                     break;
@@ -100,7 +103,7 @@ public class MainUserActivity extends AppCompatActivity {
     private void CheckUser(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
         if(user == null){
-            startActivity(new Intent(MainUserActivity.this,LoginActivity.class));
+            startActivity(new Intent(MainUserActivity.this, LoginActivity.class));
             finish();
         }else{
             loadMyInfo();

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.flashcart.Adaptor.AdaptorProductSeller;
 import com.example.flashcart.LoginActivity;
+import com.example.flashcart.Model.ModelProduct;
 import com.example.flashcart.R;
 import com.example.flashcart.categorylist.Constants;
 import com.example.flashcart.profilePage.ProfileActivitySeller;

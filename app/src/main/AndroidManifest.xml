@@ -37,7 +37,7 @@
             android:name=".profilePage.ProfileActivityUser"
             android:exported="false" />
         <activity
-            android:name=".MainUserActivity"
+            android:name=".UserPage.MainUserActivity"
             android:exported="false" />
         <activity
             android:name=".SellerPage.MainsellerActivity"
