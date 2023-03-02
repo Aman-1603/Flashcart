@@ -1,6 +1,7 @@
 package com.example.flashcart.Adaptor;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,14 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashcart.Model.ModelShop;
 import com.example.flashcart.R;
+import com.example.flashcart.UserPage.UserShowShopDetail;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -95,8 +100,74 @@ public class AdaptorShopUser extends RecyclerView.Adapter<AdaptorShopUser.Holder
         }
 
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Bundle bundle = new Bundle();
+                bundle.putString("shopUid",uid); // add the data to the bundle using a key-value pair
+
+                // Create an instance of the new fragment
+                UserShowShopDetail newFragment = new UserShowShopDetail();
+
+                // Set the arguments for the new fragment to the bundle
+                newFragment.setArguments(bundle);
+
+                // Get the fragment manager
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+
+
+//
+//                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+//
+//                // Begin a new transaction
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//                // Create an instance of the new fragment
+//                UserShowShopDetail newFragment = new UserShowShopDetail();
+//
+//                // Replace the previous fragment with the new fragment
+//                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+//
+//                // Commit the transaction
+//                fragmentTransaction.commit();
+
+            }
+        });
+
 
     }
+
+    private void replaceFragment(UserShowShopDetail fragment) {
+
+
+//        FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//        // Create an instance of the new fragment
+//        Fragment newFragment = new Fragment();
+//
+//        // Add the new fragment to the transaction
+//        fragmentTransaction.add(R.id.Frame_layout, fragment);
+//
+//        // Commit the transaction
+//        fragmentTransaction.commit();
+
+    }
+
 
     @Override
     public int getItemCount() {

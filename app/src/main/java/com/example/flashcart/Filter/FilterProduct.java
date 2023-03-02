@@ -1,4 +1,4 @@
-package com.example.flashcart.SellerPage;
+package com.example.flashcart.Filter;
 
 import android.widget.Filter;
 
