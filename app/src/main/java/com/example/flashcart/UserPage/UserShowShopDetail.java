@@ -7,7 +7,10 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
@@ -45,8 +48,10 @@ public class UserShowShopDetail extends Fragment {
     private static final int REQUEST_CODE_MAPS = 1;
 
     String shopUid;
-    String myLatiitude,myLongitude;
-    String ShopLatiitude,ShopLongitude,shopName,shopEmail,shopPhone;
+    Double myLatiitude,myLongitude;
+    Double ShopLatiitude,ShopLongitude;
+
+    String shopName,shopEmail,shopPhone;
 
     EditText searchproductEt1;
     private RecyclerView productRv;
@@ -128,7 +133,39 @@ public class UserShowShopDetail extends Fragment {
         shopmapBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMap();
+//                openMap();
+
+                // Create an instance of the new fragment
+                UserMapsFragment newFragment = new UserMapsFragment();
+
+                Bundle bundle = new Bundle();
+
+                bundle.putDouble("mylatitude",myLatiitude);
+                bundle.putDouble("mylongitude",myLongitude);
+                bundle.putDouble("shoplatitude",ShopLatiitude);
+                bundle.putDouble("shoplongitude",ShopLongitude);// add the data to the bundle using a key-value pair
+
+
+
+                // Set the arguments for the new fragment to the bundle
+                newFragment.setArguments(bundle);
+
+                // Get the fragment manager
+                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+
+
             }
         });
 
@@ -231,8 +268,8 @@ public class UserShowShopDetail extends Fragment {
                             String profileImage = ""+ds.child("profileImage").getValue();
                             String accountType = ""+ds.child("accountType").getValue();
                             String city = ""+ds.child("city").getValue();
-                            myLatiitude= ""+ds.child("latitude").getValue();
-                            myLongitude  = ""+ds.child("longitude").getValue();
+                            myLatiitude= Double.valueOf(""+ds.child("latitude").getValue());
+                            myLongitude  = Double.valueOf(""+ds.child("longitude").getValue());
 
 
 
@@ -265,8 +302,8 @@ public class UserShowShopDetail extends Fragment {
                              shopName = ""+datasnapshot.child("shopName").getValue();
                             shopEmail = ""+datasnapshot.child("email").getValue();
                             shopPhone = ""+datasnapshot.child("Phone").getValue();
-                            ShopLatiitude= ""+datasnapshot.child("latitude").getValue();
-                            ShopLongitude  = ""+datasnapshot.child("longitude").getValue();
+                            ShopLatiitude= Double.valueOf(""+datasnapshot.child("latitude").getValue());
+                            ShopLongitude  = Double.valueOf(""+datasnapshot.child("longitude").getValue());
                             String shopeAddressTV = ""+datasnapshot.child("address").getValue();
                             String deliveryFee = ""+datasnapshot.child("deliveryFees").getValue();
                             String profileImage = ""+datasnapshot.child("profileImage").getValue();

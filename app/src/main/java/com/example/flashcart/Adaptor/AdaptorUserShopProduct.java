@@ -2,6 +2,7 @@ package com.example.flashcart.Adaptor;
 
 import android.content.Context;
 import android.graphics.Paint;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashcart.Filter.FilterProductUser;
 import com.example.flashcart.Model.ModelProduct;
 import com.example.flashcart.Model.ModelShop;
 import com.example.flashcart.R;
+import com.example.flashcart.UserPage.UserProductPage;
+import com.example.flashcart.UserPage.UserShowShopDetail;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -64,6 +70,8 @@ public class AdaptorUserShopProduct extends RecyclerView.Adapter<AdaptorUserShop
         String timestamp = modelProduct.getTimeStamp();
         String productIcon = modelProduct.getProductIcon();
 
+        String uid = modelProduct.getUid();
+
 
         //now actual set data
 
@@ -110,6 +118,29 @@ public class AdaptorUserShopProduct extends RecyclerView.Adapter<AdaptorUserShop
             public void onClick(View v) {
 
                 //Show Product whole detail
+
+                Bundle bundle = new Bundle();
+                bundle.putString("ItemUid",uid); // add the data to the bundle using a key-value pair
+
+
+                // Create an instance of the new fragment
+                UserProductPage newFragment = new UserProductPage();
+
+                newFragment.setArguments(bundle);
+                // Get the fragment manager
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
 
             }
         });
