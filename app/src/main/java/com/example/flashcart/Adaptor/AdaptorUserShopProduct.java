@@ -73,6 +73,8 @@ public class AdaptorUserShopProduct extends RecyclerView.Adapter<AdaptorUserShop
         String uid = modelProduct.getUid();
 
 
+
+
         //now actual set data
 
         holder.titleTv.setText(productTitle);
@@ -120,7 +122,8 @@ public class AdaptorUserShopProduct extends RecyclerView.Adapter<AdaptorUserShop
                 //Show Product whole detail
 
                 Bundle bundle = new Bundle();
-                bundle.putString("ItemUid",uid); // add the data to the bundle using a key-value pair
+                bundle.putString("ItemUid",productId);// add the data to the bundle using a key-value pair
+                bundle.putString("ShopUid",uid);
 
 
                 // Create an instance of the new fragment

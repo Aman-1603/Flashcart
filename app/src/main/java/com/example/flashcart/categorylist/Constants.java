@@ -1,6 +1,6 @@
 package com.example.flashcart.categorylist;
 
-public class Constants {
+public class  Constants {
 
     //product categories
     public static final String[] productcategories = {

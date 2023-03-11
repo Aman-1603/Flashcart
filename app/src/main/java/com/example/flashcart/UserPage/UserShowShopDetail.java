@@ -282,7 +282,6 @@ public class UserShowShopDetail extends Fragment {
                     }
                 });
 
-
     }
 
     private void loadShopDetail() {
