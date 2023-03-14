@@ -29,8 +29,6 @@ import java.util.ArrayList;
 
 public class UserShowShop extends Fragment {
 
-
-
      RecyclerView recyclerView;
      FirebaseAuth firebaseAuth;
      ProgressDialog progressDialog;
@@ -79,12 +77,8 @@ public class UserShowShop extends Fragment {
 
                             loadShop(city);
 
-
-
                         }
                     }
-
-
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -132,7 +126,6 @@ public class UserShowShop extends Fragment {
 
                     }
                 });
-
 
     }
 

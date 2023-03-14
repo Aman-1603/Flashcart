@@ -1,6 +1,8 @@
 package com.example.flashcart.Model;
 
-public class ModelProduct {
+import java.io.Serializable;
+
+public class ModelProduct implements Serializable {
     private String ProductId, ProductTitle,ProductDescription,ProductCategory,ProductQuantity,
             ProductIcon,ProductPrice,ProductDiscountPrice,ProductDiscountNote,ProductDiscountAvailable,TimeStamp,uid;
 

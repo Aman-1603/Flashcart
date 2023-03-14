@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
+        android:background="@drawable/violet_circular_border"
         android:padding="10dp">
 
 
@@ -123,8 +124,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/baseline_map_24"/>
-
-
 
         </LinearLayout>
 
@@ -225,10 +224,6 @@
             android:textSize="20dp"
             android:layout_below="@id/searchproductEt1"
             android:textStyle="bold"/>
-
-
-
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclarItem"

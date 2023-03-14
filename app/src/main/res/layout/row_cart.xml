@@ -5,8 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="1dp"
     app:cardElevation="3dp"
-    app:contentPadding="5dp"
-    android:background="@drawable/violet_circular_border">
+    app:contentPadding="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,7 +23,7 @@
             app:c_border_width="1dp"
             app:c_border_color="@color/grey_font"/>
 
-<!--        online and offline status-->
+        <!--        online and offline status-->
 
         <ImageView
             android:id="@+id/onlineTV"
@@ -90,13 +89,12 @@
                 android:rating="3.5"
                 android:layout_gravity="end"/>
 
-
         </LinearLayout>
 
 
 
         <ImageView
-           android:id="@+id/nextTV"
+            android:id="@+id/nextTV"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_navigate_next_24"

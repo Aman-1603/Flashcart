@@ -186,8 +186,6 @@ public class AdaptorUserShopProduct extends RecyclerView.Adapter<AdaptorUserShop
             orignalPriceTv = itemView.findViewById(R.id.orignalPriceTv);
 
 
-
-
         }
     }
 
