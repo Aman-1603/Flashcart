@@ -333,7 +333,6 @@ public class UserShowShopDetail extends Fragment {
 
                         }
 
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 

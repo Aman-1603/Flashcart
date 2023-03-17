@@ -1,18 +1,23 @@
 package com.example.flashcart.UserPage;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blogspot.atifsoftwares.circularimageview.CircularImageView;
+import com.example.flashcart.Model.ModelProduct;
 import com.example.flashcart.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +26,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import java.util.concurrent.ExecutionException;
+
+import p32929.androideasysql_library.Column;
+import p32929.androideasysql_library.EasyDB;
 
 
 public class UserProductPage extends Fragment {
@@ -31,6 +41,9 @@ public class UserProductPage extends Fragment {
     ImageView productimage;
     TextView productUid;
 
+    String ProductIcon,ProductTitle,ProductPrice,ProductDescription,ProductCategory,ProductDiscountPrice,ProductDiscountNote,ProductDiscountAvailable,ProductQuantity;
+
+    Button addtoCart;
 
     String ItemUid;
     String ShopUid;
@@ -60,6 +73,7 @@ public class UserProductPage extends Fragment {
         PhoneTV = view.findViewById(R.id.PhoneTV);
         productUid = view.findViewById(R.id.productUid);
         productimage = view.findViewById(R.id.product_image);
+        addtoCart = view.findViewById(R.id.add_to_cart_button);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -72,13 +86,26 @@ public class UserProductPage extends Fragment {
         }
 
 
+
         loadmyInfo();
         loadproductDetail();
+
+
+        ModelProduct modelProduct = new ModelProduct();
+
+        addtoCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addtoCart(modelProduct);
+            }
+        });
+
 
 
 
         return view;
     }
+
 
     private void loadmyInfo() {
 
@@ -101,8 +128,6 @@ public class UserProductPage extends Fragment {
 //                            myLatiitude= Double.valueOf(""+ds.child("latitude").getValue());
 //                            myLongitude  = Double.valueOf(""+ds.child("longitude").getValue());
 
-
-
                             PhoneTV.setText(phone);
                             cityTV.setText(city);
                             StateTV.setText(state);
@@ -124,7 +149,6 @@ public class UserProductPage extends Fragment {
     private void loadproductDetail() {
 
 
-
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(ShopUid).child("Products");
         ref.orderByChild("ItemUid").addValueEventListener(new ValueEventListener() {
             @Override
@@ -134,17 +158,26 @@ public class UserProductPage extends Fragment {
 
                     // only update the views if the current product's ID matches the desired ID
                     if(itemUid.equals(ItemUid)){
-                        String title = ds.child("ProductTitle").getValue(String.class);
-                        String price = ds.child("ProductPrice").getValue(String.class);
-                        String description = ds.child("ProductDescription").getValue(String.class);
-                        String image = ds.child("ProductIcon").getValue(String.class);
+                         ProductTitle = ds.child("ProductTitle").getValue(String.class);
+                         ProductPrice = ds.child("ProductPrice").getValue(String.class);
+                         ProductDescription = ds.child("ProductDescription").getValue(String.class);
+                         ProductIcon = ds.child("ProductIcon").getValue(String.class);
+                        ProductCategory = ds.child("ProductCategory").getValue(String.class);
+                        ProductDiscountPrice = ds.child("ProductDiscountPrice").getValue(String.class);
+                        ProductDiscountNote = ds.child("ProductDiscountNote").getValue(String.class);
+                        ProductDiscountAvailable = ds.child("ProductDiscountAvailable").getValue(String.class);
+                        ProductQuantity = ds.child("ProductQuantity").getValue(String.class);
+
+
+
+
 
                         // update the views for the current product
-                        productTitleTV.setText(title);
-                        productTitle1TV.setText(title);
-                        ProductPriceTV.setText(price);
-                        product_descriptionTV.setText(description);
-                        Picasso.get().load(image).into(productimage);
+                        productTitleTV.setText(ProductTitle);
+                        productTitle1TV.setText(ProductTitle);
+                        ProductPriceTV.setText(ProductPrice);
+                        product_descriptionTV.setText(ProductDescription);
+                        Picasso.get().load(ProductIcon).into(productimage);
                     }
                 }
             }
@@ -155,6 +188,171 @@ public class UserProductPage extends Fragment {
             }
         });
 
+
+    }
+
+
+      double cost = 0;
+     double finalcost = 0;
+     int quantity1 = 0;
+
+    private void addtoCart(ModelProduct modelProduct) {
+
+        View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_quantity, null);
+
+        LinearLayout innerlayout = view.findViewById(R.id.innerLayout);
+
+        TextView titleTv = view.findViewById(R.id.titleTv);
+        TextView Quantity = view.findViewById(R.id.showquantityTv);
+        TextView descriptionTV = view.findViewById(R.id.descriptionTv);
+        TextView orignalPriceTv = view.findViewById(R.id.orignalPriceTv);
+        TextView discountPriceTv = view.findViewById(R.id.discountPriceTv);
+        TextView finalPriceTv = view.findViewById(R.id.finalPriceTv);
+        TextView showquantityTv = view.findViewById(R.id.showquantityTv);
+        ImageButton minusbutton = view.findViewById(R.id.minusbutton);
+        ImageButton plusbutton = view.findViewById(R.id.plusbutton);
+        CircularImageView producticonTv = view.findViewById(R.id.producticonTv);
+        Button AddToCart = view.findViewById(R.id.AddToCart);
+
+
+
+
+
+        String price;
+
+        if (ProductDiscountAvailable.equals("true")) {
+
+            //then product have discount
+
+            price = ProductDiscountPrice;
+
+
+
+        } else {
+
+            price = ProductPrice;
+
+        }
+
+
+
+
+
+        cost = Double.parseDouble(price.replaceAll("$", ""));
+        finalcost = Double.parseDouble(price.replaceAll("$", ""));
+        quantity1 = 1;
+
+
+        //setting up alert builder
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setView(view);
+
+
+
+        try {
+
+            Picasso.get().load(ProductIcon).into(producticonTv);
+
+        }catch (Exception e){
+            producticonTv.setImageResource(R.drawable.baseline_add_shopping_black_cart_24);
+        }
+
+
+//        description
+
+        titleTv.setText(ProductTitle);
+        descriptionTV.setText(ProductDescription);
+        showquantityTv.setText(""+quantity1);
+        orignalPriceTv.setText(ProductPrice);
+        discountPriceTv.setText(ProductDiscountPrice);
+        finalPriceTv.setText(""+finalcost);
+
+
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+
+        plusbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finalcost = finalcost + cost;
+                quantity1++;
+
+                finalPriceTv.setText("$"+finalcost);
+                showquantityTv.setText(""+quantity1);
+            }
+        });
+
+        minusbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (quantity1 > 1){
+                    finalcost = finalcost - cost;
+                    quantity1--;
+
+                    finalPriceTv.setText("$"+finalcost);
+                    showquantityTv.setText(""+quantity1);
+
+
+                }
+
+            }
+        });
+
+        AddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String title = titleTv.getText().toString().trim();
+                String priceEach = orignalPriceTv.getText().toString().trim();
+                String price = finalPriceTv.getText().toString().trim();
+                String quantity = showquantityTv.getText().toString().trim();
+
+
+                //now we will add cart detail to SQLITE database
+
+                addToCart(ItemUid,title,priceEach,price,quantity);
+                
+                dialog.dismiss();
+
+
+            }
+        });
+
+    }
+
+
+
+    private int itemId =1;
+    private void addToCart(String itemUid, String title, String priceEach, String price, String quantity) {
+
+
+        itemId++;
+
+        EasyDB easyDB = EasyDB.init(getContext(),"ITEMS_DB")
+                .setTableName("ITEMS_TABLE")
+                .addColumn(new Column("Item_Id", new String[]{"text","unique"}))
+                .addColumn(new Column("Item_PID", new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Name", new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Price_Each", new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Price", new String[]{"text","not null"}))
+                .addColumn(new Column("Item_Quantity", new String[]{"text","not null"}))
+                .doneTableColumn();
+
+        Boolean b = easyDB.addData("Item_Id",itemId)
+                .addData("Item_PID",ItemUid)
+                .addData("Item_Name",title)
+                .addData("Item_Price_Each",priceEach)
+                .addData("Item_Price",price)
+                .addData("Item_Quantity",quantity)
+                .doneDataAdding();
+
+
+        Toast.makeText(getContext(), "Added To cart successfully", Toast.LENGTH_SHORT).show();
 
     }
 

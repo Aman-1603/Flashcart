@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/outerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/innerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_bg"
+        android:layout_marginLeft="20dp"
+        android:padding="20dp"
+        android:elevation="5dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical"
+        android:layout_marginTop="30dp">
+
+        <ImageButton
+
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+
+            android:layout_margin="10dp"
+            android:src="@drawable/baseline_close_24"
+            android:background="@android:color/transparent"
+            android:layout_gravity="right|top"/>
+
+
+        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+            android:id="@+id/producticonTv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="-50dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/baseline_add_shopping_black_cart_24"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="OnePlus 11"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+
+
+
+            <TextView
+                android:id="@+id/descriptionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Description"
+                android:textColor="@color/black"
+                android:layout_below="@id/titleTv"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+
+            <TextView
+                android:id="@+id/orignalPriceTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Orignal Price"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/descriptionTv"
+                android:textStyle="bold"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/finalPriceTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Final Price"
+                android:textColor="@color/black"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/descriptionTv"
+                android:textStyle="bold"
+                android:textSize="18dp"/>
+
+            <TextView
+                android:id="@+id/discountPriceTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Discount Price"
+                android:textColor="@color/black"
+                android:layout_alignParentStart="true"
+                android:layout_below="@id/orignalPriceTv"
+                android:textStyle="bold"
+                android:textSize="18dp"/>
+
+
+
+
+        </RelativeLayout>
+        
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:gravity="center_horizontal"
+            android:layout_marginEnd="10dp">
+
+
+            <ImageButton
+                android:id="@+id/minusbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/baseline_remove_circle_24"/>
+
+            <TextView
+                android:id="@+id/showquantityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/baseline_remove_circle_24"
+                android:text="10"
+                android:textColor="@color/black"
+                android:textSize="15dp" />
+
+            <ImageButton
+                android:id="@+id/plusbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/baseline_add_circle_24"/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/AddToCart"
+            android:layout_width="200dp"
+            android:layout_height="70dp"
+            android:textSize="16dp"
+            android:text="AddToCart"
+            android:layout_gravity="center_horizontal"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

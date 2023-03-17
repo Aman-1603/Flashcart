@@ -64,3 +64,20 @@ public class FilterProduct extends Filter {
 
     }
 }
+
+
+
+
+
+
+
+
+//            public boolean onQueryTextChange(String newText) {
+//                try {
+//                    adaptorUserShopProduct.getFilter().filter(newText);
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                }
+//            return true;
+//        }
+//          });

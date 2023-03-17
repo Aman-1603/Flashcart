@@ -8,6 +8,8 @@ import androidx.lifecycle.viewmodel.CreationExtras;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,18 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.DirectionsApi;
+import com.google.maps.DirectionsApiRequest;
+import com.google.maps.GeoApiContext;
+import com.google.maps.PendingResult;
+import com.google.maps.internal.PolylineEncoding;
+import com.google.maps.model.DirectionsLeg;
+import com.google.maps.model.DirectionsResult;
+import com.google.maps.model.DirectionsRoute;
+import com.google.maps.model.DirectionsStep;
+import com.google.maps.model.TravelMode;
+
+import java.util.List;
 
 
 public class UserMapsFragment extends Fragment implements OnMapReadyCallback {
@@ -50,10 +64,10 @@ public class UserMapsFragment extends Fragment implements OnMapReadyCallback {
         shopLatitude = bundle.getDouble("shoplatitude");
         shopLongitude = bundle.getDouble("shoplongitude");
 
-        Toast.makeText(getContext(), String.valueOf(myLatitude), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), String.valueOf(myLongitude), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), String.valueOf(shopLatitude), Toast.LENGTH_SHORT).show();
-        Toast.makeText(getContext(), String.valueOf(shopLongitude), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), String.valueOf(myLatitude), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), String.valueOf(myLongitude), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), String.valueOf(shopLatitude), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), String.valueOf(shopLongitude), Toast.LENGTH_SHORT).show();
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
@@ -78,6 +92,11 @@ public class UserMapsFragment extends Fragment implements OnMapReadyCallback {
 
 
 
+        //requesting for direction map
+        requestDirections(myLocation, shopLocation);
+
+
+
 
         // Add a path between the two locations
         PolylineOptions polylineOptions = new PolylineOptions()
@@ -98,5 +117,57 @@ public class UserMapsFragment extends Fragment implements OnMapReadyCallback {
         CameraPosition cameraPosition = new CameraPosition.Builder().target(shopLocation).zoom(14).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
+
+
+
+    //adding navigation features in map fragmnet
+
+
+    private void requestDirections(LatLng origin, LatLng destination) {
+        String apiKey = "AIzaSyDulp_wrPCM85XxTBY26VXxoCfZM1KTuAk"; // Replace with your Google Maps API key
+        GeoApiContext context = new GeoApiContext.Builder()
+                .apiKey(apiKey)
+                .build();
+        DirectionsApiRequest request = DirectionsApi.newRequest(context)
+                .origin(new com.google.maps.model.LatLng(origin.latitude, origin.longitude))
+                .destination(new com.google.maps.model.LatLng(destination.latitude, destination.longitude))
+                .mode(TravelMode.DRIVING); // Use driving mode for navigation
+        request.setCallback(new PendingResult.Callback<DirectionsResult>() {
+            @Override
+            public void onResult(DirectionsResult result) {
+                // Process the directions result and display the route on the map
+                if (result.routes != null && result.routes.length > 0) {
+                    DirectionsRoute route = result.routes[0];
+                    PolylineOptions polylineOptions = new PolylineOptions()
+                            .color(Color.BLUE)
+                            .width(5);
+                    for (DirectionsLeg leg : route.legs) {
+                        for (DirectionsStep step : leg.steps) {
+                            List<com.google.maps.model.LatLng> points = PolylineEncoding.decode(step.polyline.getEncodedPath());
+                            for (com.google.maps.model.LatLng point : points) {
+                                polylineOptions.add(new LatLng(point.lat, point.lng));
+                            }
+                        }
+                    }
+                    googleMap.addPolyline(polylineOptions);
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable e) {
+                // Handle the error if the directions request fails
+//                Toast.makeText(getContext(), "Failed to get directions: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+            }
+        });
+    }
+
+
 
 }
