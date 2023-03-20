@@ -363,6 +363,8 @@ public class UserShowShopDetail extends Fragment {
 
                        //now setup Adaptor
 
+
+
                         adaptorUserShopProduct= new AdaptorUserShopProduct(getContext(),productsList);
 
                        //set adaptor

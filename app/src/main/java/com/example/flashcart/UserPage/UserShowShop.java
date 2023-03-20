@@ -119,6 +119,8 @@ public class UserShowShop extends Fragment {
 
                         recyclerView.setAdapter(adaptorShopUser);
 
+
+
                     }
 
                     @Override

@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class ModelProduct implements Serializable {
     private String ProductId, ProductTitle,ProductDescription,ProductCategory,ProductQuantity,
-            ProductIcon,ProductPrice,ProductDiscountPrice,ProductDiscountNote,ProductDiscountAvailable,TimeStamp,uid;
+            ProductIcon,ProductPrice,ProductDiscountPrice,ProductDiscountNote,ProductDiscountAvailable,TimeStamp,uid,ShopUid;
 
     public ModelProduct() {
     }
 
-    public ModelProduct(String productId, String productTitle, String productDescription, String productCategory, String productQuantity, String productIcon, String productPrice, String productDiscountPrice, String productDiscountNote, String productDiscountAvailable, String timeStamp, String uid) {
+    public ModelProduct(String productId, String productTitle, String productDescription, String productCategory, String productQuantity, String productIcon, String productPrice, String productDiscountPrice, String productDiscountNote, String productDiscountAvailable, String timeStamp, String uid, String ShopUid) {
         ProductId = productId;
         ProductTitle = productTitle;
         ProductDescription = productDescription;
@@ -21,6 +21,7 @@ public class ModelProduct implements Serializable {
         ProductDiscountNote = productDiscountNote;
         ProductDiscountAvailable = productDiscountAvailable;
         TimeStamp = timeStamp;
+        ShopUid = ShopUid;
         this.uid = uid;
     }
 
@@ -118,5 +119,13 @@ public class ModelProduct implements Serializable {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getShopUid(){
+        return ShopUid;
+    }
+
+    public void setShopUid(String ShopUid){
+        this.ShopUid = ShopUid;
     }
 }

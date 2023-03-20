@@ -1,6 +1,8 @@
 package com.example.flashcart.UserPage;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,14 +21,21 @@ import android.widget.Toast;
 import com.blogspot.atifsoftwares.circularimageview.CircularImageView;
 import com.example.flashcart.Model.ModelProduct;
 import com.example.flashcart.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
 import p32929.androideasysql_library.Column;
@@ -47,6 +56,10 @@ public class UserProductPage extends Fragment {
 
     String ItemUid;
     String ShopUid;
+
+    private ProgressDialog progressDialog;
+
+    private Uri image_uri;
 
     private FirebaseAuth firebaseAuth;
 
@@ -134,7 +147,7 @@ public class UserProductPage extends Fragment {
                             CountryTV.setText(country);
                             addressTV.setText(address);
 
-                            productUid.setText(ItemUid);
+                            productUid.setText(ShopUid);
 
                         }
                     }
@@ -178,6 +191,10 @@ public class UserProductPage extends Fragment {
                         ProductPriceTV.setText(ProductPrice);
                         product_descriptionTV.setText(ProductDescription);
                         Picasso.get().load(ProductIcon).into(productimage);
+
+                        image_uri = Uri.parse(ProductIcon);
+
+
                     }
                 }
             }
@@ -320,40 +337,87 @@ public class UserProductPage extends Fragment {
                 dialog.dismiss();
 
 
+
             }
         });
 
     }
 
 
-
-    private int itemId =1;
     private void addToCart(String itemUid, String title, String priceEach, String price, String quantity) {
 
+//        progressDialog.setMessage("Adding Product to cart please wait");
+//        progressDialog.show();
 
-        itemId++;
-
-        EasyDB easyDB = EasyDB.init(getContext(),"ITEMS_DB")
-                .setTableName("ITEMS_TABLE")
-                .addColumn(new Column("Item_Id", new String[]{"text","unique"}))
-                .addColumn(new Column("Item_PID", new String[]{"text","not null"}))
-                .addColumn(new Column("Item_Name", new String[]{"text","not null"}))
-                .addColumn(new Column("Item_Price_Each", new String[]{"text","not null"}))
-                .addColumn(new Column("Item_Price", new String[]{"text","not null"}))
-                .addColumn(new Column("Item_Quantity", new String[]{"text","not null"}))
-                .doneTableColumn();
-
-        Boolean b = easyDB.addData("Item_Id",itemId)
-                .addData("Item_PID",ItemUid)
-                .addData("Item_Name",title)
-                .addData("Item_Price_Each",priceEach)
-                .addData("Item_Price",price)
-                .addData("Item_Quantity",quantity)
-                .doneDataAdding();
+        String timestamp = ""+System.currentTimeMillis();
+//        image_uri = Uri.parse(ProductIcon);
 
 
-        Toast.makeText(getContext(), "Added To cart successfully", Toast.LENGTH_SHORT).show();
 
-    }
 
-}
+                            //setup data to upload
+
+                            HashMap<String, Object> cartItem = new HashMap<>();
+
+                            cartItem.put("itemUid", itemUid);
+                            cartItem.put("ShopUid",ShopUid);
+                            cartItem.put("title", title);
+                            cartItem.put("priceEach", priceEach);
+
+                            cartItem.put("price", price);
+                            cartItem.put("quantity", quantity);
+
+                            cartItem.put("ProductIcon",ProductIcon); //no image
+                            cartItem.put("uid", "" + firebaseAuth.getUid());
+
+
+                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+
+                            reference.child(firebaseAuth.getUid()).child("AddtoCart").child(timestamp).setValue(cartItem)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+
+//                                            progressDialog.dismiss();
+                                            Toast.makeText(getContext(), "Products Added", Toast.LENGTH_SHORT).show();
+
+
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+//                                            progressDialog.dismiss();
+                                            Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+
+
+                        }
+                    }
+
+
+
+
+        // Create a HashMap to store the cart item data
+
+
+
+
+
+
+
+//    FirebaseDatabase database = FirebaseDatabase.getInstance();
+//    DatabaseReference cartRef = database.getReference("Users").child(firebaseAuth.getUid()).child("AddtoCart");
+
+//    HashMap<String, Object> cartItem = new HashMap<>();
+//        cartItem.put("itemUid", itemUid);
+//                cartItem.put("ShopUid",ShopUid);
+//                cartItem.put("title", title);
+//                cartItem.put("priceEach", priceEach);
+//
+//                cartItem.put("price", price);
+//                cartItem.put("quantity", quantity);
+//
+//                // Add the cart item data to the Firebase database
+//                cartRef.push().setValue(cartItem);
