@@ -78,6 +78,24 @@
         android:layout_height="wrap_content"
         android:background="@color/white">
 
+        <TextView
+            android:id="@+id/productTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Total"
+            android:paddingLeft="10dp"
+            android:textColor="@color/black"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/productTotalTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹1000"
+            android:paddingLeft="10dp"
+            android:layout_toEndOf="@id/productTotal"
+            android:textColor="@color/textColor"
+            android:textSize="22dp" />
 
         <TextView
             android:id="@+id/deliveryfee"
@@ -85,18 +103,20 @@
             android:layout_height="wrap_content"
             android:text="Delivery Fee"
             android:paddingLeft="10dp"
+            android:layout_below="@id/productTotal"
             android:textColor="@color/black"
-            android:textSize="25dp" />
+            android:textSize="22dp" />
 
         <TextView
             android:id="@+id/deliveryfeeTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rs 1000"
+            android:text="₹1000"
             android:paddingLeft="10dp"
+            android:layout_below="@id/productTotalTv"
             android:layout_toEndOf="@id/deliveryfee"
             android:textColor="@color/textColor"
-            android:textSize="25dp" />
+            android:textSize="22dp" />
 
 
         <TextView
@@ -113,7 +133,7 @@
             android:id="@+id/subtotalTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rs 1000"
+            android:text="₹1000"
             android:paddingLeft="10dp"
             android:layout_toEndOf="@id/deliveryfee"
             android:layout_below="@id/deliveryfee"
@@ -131,6 +151,7 @@
             android:textStyle="bold"
             android:backgroundTint="#FFC107"
             android:layout_below="@id/subtotal"/>
+
 
 
     </RelativeLayout>

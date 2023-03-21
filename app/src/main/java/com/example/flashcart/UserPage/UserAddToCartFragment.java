@@ -12,10 +12,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.flashcart.Adaptor.AdaptorCartItem;
 import com.example.flashcart.Model.ModelCartItemRecieve;
 import com.example.flashcart.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class UserAddToCartFragment extends Fragment {
@@ -31,6 +37,18 @@ public class UserAddToCartFragment extends Fragment {
     RecyclerView recyclerView;
     FirebaseAuth firebaseAuth;
     ProgressDialog progressDialog;
+
+    TextView producttotal,deliveryFeeTv,subtotalTv;
+
+    Button finalorder;
+
+    String shopUid,deliveryfee;
+
+    String myLatiitude,myLongitude,myphone;
+
+    double allTotalPrice = 0.0;
+    double subtotalPrice = 0.0;
+
 
     AdaptorCartItem adaptorCartItem;
     ArrayList<ModelCartItemRecieve> list;
@@ -52,12 +70,158 @@ public class UserAddToCartFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
+        deliveryFeeTv = view.findViewById(R.id.deliveryfeeTv);
+        subtotalTv = view.findViewById(R.id.subtotalTv);
+        producttotal = view.findViewById(R.id.productTotalTv);
+        finalorder = view.findViewById(R.id.finalorderTv);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
+
+
+
+        loadmyInfo();
         loadcartItem();
+
+
+        finalorder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (myLatiitude.equals("") || myLatiitude.equals("null") || myLongitude.equals("") || myLongitude.equals("null")){
+
+                    Toast.makeText(getContext(), "Please Enter your Location detail in your profile page", Toast.LENGTH_SHORT).show();
+
+                    return;
+
+                }
+
+                if (myphone.equals("") || myphone.equals("null")){
+
+                    Toast.makeText(getContext(), "Please Enter your Phone detail in your profile page", Toast.LENGTH_SHORT).show();
+
+                    return;
+
+                }
+
+                if (list.size() == 0){
+
+                    Toast.makeText(getContext(), "No item in Cart", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+
+                submitOrder();
+
+
+            }
+        });
+
 
         return view;
     }
+
+    private void submitOrder() {
+
+
+
+        String timestamp = ""+System.currentTimeMillis();
+
+        String cost = subtotalTv.toString().trim().replace("₹","");
+
+        HashMap<String,String> hashMap = new HashMap<>();
+        hashMap.put("orderId",""+timestamp);
+        hashMap.put("orderTime",""+timestamp);
+        hashMap.put("orderStatus","In Progress");
+        hashMap.put("orderBy",""+firebaseAuth.getUid());
+        hashMap.put("orderTo",""+shopUid);
+
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(shopUid).child("Orders");
+        ref.child(timestamp).setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                        //order information is added now add order item to database
+
+                        for (int i=0; i<list.size(); i++){
+
+                            String pId = list.get(i).getItemUid();
+                            String id = list.get(i).getUid();
+                            String cost = list.get(i).getPrice();
+                            String name = list.get(i).getTitle();
+                            String price = list.get(i).getPriceEach();
+                            String quantity = list.get(i).getQuantity();
+
+                            HashMap<String,String> hashMap1 = new HashMap<>();
+                            hashMap1.put("pId",pId);
+                            hashMap1.put("name",name);
+                            hashMap1.put("cost",cost);
+                            hashMap1.put("price",price);
+                            hashMap1.put("quantity",quantity);
+
+                            ref.child(timestamp).child("Items").child(pId).setValue(hashMap1);
+
+
+
+                        }
+
+
+                        Toast.makeText(getContext(), "Order Placed Successfully", Toast.LENGTH_SHORT).show();
+
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+
+                        Toast.makeText(getContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+
+
+                    }
+                });
+
+
+
+
+    }
+
+
+    private void loadmyInfo() {
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.orderByChild("uid").equalTo(firebaseAuth.getUid())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                        for(DataSnapshot ds : datasnapshot.getChildren()){
+                            String name = ""+ds.child("name").getValue();
+                            String email = ""+ds.child("email").getValue();
+                            myphone = ""+ds.child("Phone").getValue();
+                            String profileImage = ""+ds.child("profileImage").getValue();
+                            String accountType = ""+ds.child("accountType").getValue();
+                            String city = ""+ds.child("city").getValue();
+                            String state = ""+ds.child("state").getValue();
+                            String country = ""+ds.child("country").getValue();
+                            String address = ""+ds.child("address").getValue();
+
+                            myLatiitude= ""+ds.child("latitude").getValue();
+                            myLongitude  = ""+ds.child("longitude").getValue();
+
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
 
     private void loadcartItem() {
 
@@ -77,17 +241,26 @@ public class UserAddToCartFragment extends Fragment {
 
                         for (DataSnapshot ds : datasnapshot.getChildren()){
                             ModelCartItemRecieve modelcartrecive = ds.getValue(ModelCartItemRecieve.class);
+
+                            shopUid = modelcartrecive.getShopUid();
+
+                           allTotalPrice = allTotalPrice + Double.parseDouble(modelcartrecive.getPrice());
+
                             list.add(modelcartrecive);
                         }
 
                         adaptorCartItem.notifyDataSetChanged();
 
-                        //now setup Adaptor
 
 
+                        producttotal.setText("₹"+allTotalPrice);
 
                         Log.d("FirebaseData", "Data retrieved: " + datasnapshot.getValue());
                         Log.d("Adapter", "Adapter set");
+                        Log.d("shopuid",shopUid);
+
+
+                        loadDeliveryFee(shopUid);
 
 
                     }
@@ -98,6 +271,34 @@ public class UserAddToCartFragment extends Fragment {
                     }
                 });
 
+    }
+
+    private void loadDeliveryFee(String shopUid) {
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(shopUid)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+
+                        deliveryfee = ""+datasnapshot.child("deliveryFees").getValue();
+
+                        deliveryFeeTv.setText("₹"+deliveryfee);
+
+                        subtotalPrice = allTotalPrice + Double.parseDouble(deliveryfee);
+
+                        subtotalTv.setText("₹"+subtotalPrice);
+
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
     }
+
+
 }

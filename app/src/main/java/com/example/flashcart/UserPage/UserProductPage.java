@@ -188,7 +188,7 @@ public class UserProductPage extends Fragment {
                         // update the views for the current product
                         productTitleTV.setText(ProductTitle);
                         productTitle1TV.setText(ProductTitle);
-                        ProductPriceTV.setText(ProductPrice);
+                        ProductPriceTV.setText("₹"+ProductPrice);
                         product_descriptionTV.setText(ProductDescription);
                         Picasso.get().load(ProductIcon).into(productimage);
 
@@ -297,7 +297,7 @@ public class UserProductPage extends Fragment {
                 finalcost = finalcost + cost;
                 quantity1++;
 
-                finalPriceTv.setText("$"+finalcost);
+                finalPriceTv.setText(""+finalcost);
                 showquantityTv.setText(""+quantity1);
             }
         });
@@ -311,7 +311,7 @@ public class UserProductPage extends Fragment {
                     finalcost = finalcost - cost;
                     quantity1--;
 
-                    finalPriceTv.setText("$"+finalcost);
+                    finalPriceTv.setText(""+finalcost);
                     showquantityTv.setText(""+quantity1);
 
 
@@ -349,7 +349,7 @@ public class UserProductPage extends Fragment {
 //        progressDialog.setMessage("Adding Product to cart please wait");
 //        progressDialog.show();
 
-        String timestamp = ""+System.currentTimeMillis();
+        String timestamp = ""+itemUid;
 //        image_uri = Uri.parse(ProductIcon);
 
 
