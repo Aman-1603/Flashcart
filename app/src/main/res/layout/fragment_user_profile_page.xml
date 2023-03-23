@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    tools:context=".UserPage.UserProfilePageFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#8cdbdf"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" >
+
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FlashCart.in"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/toolbar_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_search_24"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="16dp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/toplayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar">
+
+        <TextView
+            android:id="@+id/hellotext"
+            android:text="Hello, "
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+
+        <TextView
+            android:id="@+id/profileemailTv"
+            android:text="ansariaman \n 1603 @gmail.com"
+            android:textColor="@color/black"
+            android:textSize="22dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/hellotext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+            android:id="@+id/profileimage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:background="@drawable/shape_circle02"
+            android:src="@drawable/baseline_person_24"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/layoutsecond"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/toplayout">
+
+
+
+        <Button
+            android:id="@+id/profilebutton1"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:text="Your Order"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/shape_circle03"/>
+
+
+        <Button
+            android:id="@+id/profilebutton2"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="10dp"
+            android:text="Buy Again"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/shape_circle03"/>
+
+
+        <Button
+            android:id="@+id/profilebutton3"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:text="your Account"
+            android:layout_below="@id/profilebutton1"
+            android:background="@drawable/shape_circle03"/>
+
+
+        <Button
+            android:id="@+id/profilebutton4"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:text="Your WishList"
+            android:layout_below="@id/profilebutton2"
+            android:background="@drawable/shape_circle03"/>
+
+       </RelativeLayout>
+
+
+    <View
+        android:id="@+id/view1"
+        android:layout_below="@id/layoutsecond"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_rec07"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="6dp"/>
+
+    <RelativeLayout
+        android:id="@+id/layoutthird"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/view1">
+
+
+        <TextView
+            android:id="@+id/text1"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:text="Return HomePage"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Return to HomePage"
+            android:background="@drawable/shape_rec07"
+            android:layout_below="@id/text1"
+            android:layout_marginTop="10dp"
+            android:layout_height="55dp"/>
+
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/view2"
+        android:layout_below="@id/layoutthird"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_rec07"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="6dp"/>
+
+
+
+    <RelativeLayout
+        android:id="@+id/layoutfourth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view2"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Wish List"
+            android:textSize="17dp"
+            android:textColor="@color/black"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/text3"
+            android:text="See All"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:textColor="#07FDFD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card1"
+            android:layout_below="@id/text3"
+            android:layout_marginStart="10dp"
+            app:cardCornerRadius="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BDBDBD"
+                android:padding="15dp">
+
+                <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+                    android:id="@+id/shopTV"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/oneplus1"
+                    app:c_border="true"
+                    app:c_border_width="1dp"
+                    app:c_border_color="@color/grey_font"/>
+
+
+                <TextView
+                    android:id="@+id/text4"
+                    android:text="Shopping List"
+                    android:textColor="@color/black"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+
+            </RelativeLayout>
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <View
+            android:id="@+id/view3"
+            android:layout_below="@id/card1"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_rec07"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="6dp"/>
+
+
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_below="@id/layoutfourth"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+

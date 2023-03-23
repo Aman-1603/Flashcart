@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserPage.UserOrderPage">
+
+    <RelativeLayout
+        android:id="@+id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/grey_circular_border"
+            android:padding="12dp"
+            android:src="@drawable/square_icon" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/product_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orders"
+                android:textColor="@color/textColor"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/productUid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/xsmall"
+                android:textColor="@color/black"
+                android:text="Check out your cart"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/grey_circular_border"
+            android:padding="@dimen/small"
+            android:src="@drawable/heart" />
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/secondlayout"
+        android:layout_below="@id/topbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"/>
+
+
+
+    <RelativeLayout
+        android:id="@+id/listlayout"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/secondlayout">
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclarItemAddToCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/row_order_user"/>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+</RelativeLayout>

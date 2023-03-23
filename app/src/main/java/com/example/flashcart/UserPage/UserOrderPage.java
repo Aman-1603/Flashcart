@@ -10,18 +10,22 @@ import android.view.ViewGroup;
 
 import com.example.flashcart.R;
 
-public class ProfileFragment extends Fragment {
 
+public class UserOrderPage extends Fragment {
 
-    public ProfileFragment() {
+    public UserOrderPage() {
         // Required empty public constructor
     }
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_order_page, container, false);
+
+
+        return view;
     }
 }

@@ -68,7 +68,7 @@ public class MainUserActivity extends AppCompatActivity {
                     replaceFragment(new UserAddToCartFragment());
                     break;
                 case R.id.Account:
-                    replaceFragment(new ProfileFragment());
+                    replaceFragment(new UserProfilePageFragment());
                     break;
 
             }

@@ -330,7 +330,6 @@ public class UserProductPage extends Fragment {
                 String quantity = showquantityTv.getText().toString().trim();
 
 
-                //now we will add cart detail to SQLITE database
 
                 addToCart(ItemUid,title,priceEach,price,quantity);
                 

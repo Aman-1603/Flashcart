@@ -36,7 +36,7 @@ public class UserAddToCartFragment extends Fragment {
 
     RecyclerView recyclerView;
     FirebaseAuth firebaseAuth;
-    ProgressDialog progressDialog;
+
 
     TextView producttotal,deliveryFeeTv,subtotalTv;
 
@@ -124,6 +124,10 @@ public class UserAddToCartFragment extends Fragment {
 
     private void submitOrder() {
 
+        ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Please Wait while we are placing you order at our end");
+        progressDialog.show();
+
 
 
         String timestamp = ""+System.currentTimeMillis();
@@ -136,6 +140,7 @@ public class UserAddToCartFragment extends Fragment {
         hashMap.put("orderStatus","In Progress");
         hashMap.put("orderBy",""+firebaseAuth.getUid());
         hashMap.put("orderTo",""+shopUid);
+        hashMap.put("orderFinalSubTotal",""+subtotalPrice);
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(shopUid).child("Orders");
@@ -154,6 +159,7 @@ public class UserAddToCartFragment extends Fragment {
                             String name = list.get(i).getTitle();
                             String price = list.get(i).getPriceEach();
                             String quantity = list.get(i).getQuantity();
+                            String ProductIcon = list.get(i).getProductIcon();
 
                             HashMap<String,String> hashMap1 = new HashMap<>();
                             hashMap1.put("pId",pId);
@@ -161,6 +167,7 @@ public class UserAddToCartFragment extends Fragment {
                             hashMap1.put("cost",cost);
                             hashMap1.put("price",price);
                             hashMap1.put("quantity",quantity);
+                            hashMap1.put("ProductIcon",ProductIcon);
 
                             ref.child(timestamp).child("Items").child(pId).setValue(hashMap1);
 
@@ -169,7 +176,8 @@ public class UserAddToCartFragment extends Fragment {
                         }
 
 
-                        Toast.makeText(getContext(), "Order Placed Successfully", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "Order Placed Successfully", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
