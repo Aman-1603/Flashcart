@@ -81,8 +81,12 @@ public class AdaptorCartItem extends RecyclerView.Adapter<AdaptorCartItem.Holder
 
                 delete(pid);
 
+
+
+
             }
         });
+
 
 
 

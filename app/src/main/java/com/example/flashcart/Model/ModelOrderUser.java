@@ -1,18 +1,20 @@
 package com.example.flashcart.Model;
 
-public class ModelOrderUser {
+import java.io.Serializable;
 
-    String orderId, orderTime, orderStatus, orderCost, orderBy, orderTo;
+public class ModelOrderUser implements Serializable {
 
-    public ModelOrderUser(){
+    String orderId, orderTime, orderStatus, orderFinalSubTotal, orderBy, orderTo;
+
+    public ModelOrderUser() {
 
     }
 
-    public ModelOrderUser(String orderId, String orderTime, String orderStatus, String orderCost, String orderBy, String orderTo) {
+    public ModelOrderUser(String orderId, String orderTime, String orderStatus, String orderFinalSubTotal, String orderBy, String orderTo) {
         this.orderId = orderId;
         this.orderTime = orderTime;
         this.orderStatus = orderStatus;
-        this.orderCost = orderCost;
+        this.orderFinalSubTotal = orderFinalSubTotal;
         this.orderBy = orderBy;
         this.orderTo = orderTo;
     }
@@ -41,12 +43,12 @@ public class ModelOrderUser {
         this.orderStatus = orderStatus;
     }
 
-    public String getOrderCost() {
-        return orderCost;
+    public String getOrderFinalSubTotal() {
+        return orderFinalSubTotal;
     }
 
-    public void setOrderCost(String orderCost) {
-        this.orderCost = orderCost;
+    public void setOrderFinalSubTotal(String orderFinalSubTotal) {
+        this.orderFinalSubTotal = orderFinalSubTotal;
     }
 
     public String getOrderBy() {

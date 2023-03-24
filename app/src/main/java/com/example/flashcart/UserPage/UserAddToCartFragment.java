@@ -176,7 +176,7 @@ public class UserAddToCartFragment extends Fragment {
                         }
 
 
-//                        Toast.makeText(getContext(), "Order Placed Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Order Placed Successfully", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
 
                     }
@@ -252,6 +252,7 @@ public class UserAddToCartFragment extends Fragment {
 
                             shopUid = modelcartrecive.getShopUid();
 
+
                            allTotalPrice = allTotalPrice + Double.parseDouble(modelcartrecive.getPrice());
 
                             list.add(modelcartrecive);
@@ -263,9 +264,9 @@ public class UserAddToCartFragment extends Fragment {
 
                         producttotal.setText("₹"+allTotalPrice);
 
-                        Log.d("FirebaseData", "Data retrieved: " + datasnapshot.getValue());
-                        Log.d("Adapter", "Adapter set");
-                        Log.d("shopuid",shopUid);
+//                        Log.d("FirebaseData", "Data retrieved: " + datasnapshot.getValue());
+//                        Log.d("Adapter", "Adapter set");
+//                        Log.d("shopuid",shopUid);
 
 
                         loadDeliveryFee(shopUid);

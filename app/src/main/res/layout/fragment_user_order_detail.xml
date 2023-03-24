@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:background="@color/white"
+tools:context=".UserPage.UserOrderDetailFragment">
+
+
+<!--    Topbar-->
+
+<RelativeLayout
+    android:id="@+id/topbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="16dp">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/grey_circular_border"
+        android:padding="12dp"
+        android:src="@drawable/square_icon" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/product_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Details"
+            android:textColor="@color/textColor"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/grey_circular_border"
+        android:padding="@dimen/small"
+        android:src="@drawable/heart" />
+
+
+
+
+
+</RelativeLayout>
+
+
+    <View
+        android:id="@+id/view1"
+        android:background="#EDEBEB"
+        android:layout_width="match_parent"
+        android:layout_below="@id/topbar"
+        android:layout_height="5dp"/>
+
+<RelativeLayout
+    android:id="@+id/layout1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_below="@id/view1">
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Id : "
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"/>
+
+
+    <TextView
+        android:id="@+id/orderdetailId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1111111"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_toEndOf="@id/text1"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Date : "
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/text1"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/orderdetaildate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1/1/2023"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/orderdetailId"
+        android:layout_toEndOf="@id/text2"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/text3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Status : "
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/text2"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/orderdetailstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="In progress"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/orderdetaildate"
+        android:layout_toEndOf="@id/text3"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/text4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Shop Name : "
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/text3"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/orderdetailshopname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FlashCart"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/text3"
+        android:layout_toEndOf="@id/text4"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/text5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Order Item : "
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/text4"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/orderdetailitem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/orderdetailshopname"
+        android:layout_toEndOf="@id/text5"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:id="@+id/text6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Final amount : "
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/text5"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/orderdetailfinalamount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="₹2000"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/orderdetailitem"
+        android:layout_toEndOf="@id/text6"
+        android:textStyle="bold"/>
+
+
+    <TextView
+        android:id="@+id/text7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delivery address : "
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/text6"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/orderdetailaddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="303 shopper plaza cg road"
+        android:textColor="@color/black"
+        android:textSize="17dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/orderdetailfinalamount"
+        android:layout_toEndOf="@id/text7"
+        android:textStyle="bold"/>
+
+
+</RelativeLayout>
+
+
+    <View
+        android:id="@+id/view2"
+        android:background="#EDEBEB"
+        android:layout_width="match_parent"
+        android:layout_below="@id/layout1"
+        android:layout_marginTop="10dp"
+        android:layout_height="5dp"/>
+
+
+    <RelativeLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view2"
+        android:layout_marginTop="10dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            tools:listitem="@layout/row_orderdetail_user"/>
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/view3"
+        android:background="#EDEBEB"
+        android:layout_width="match_parent"
+        android:layout_below="@id/layout2"
+        android:layout_marginTop="10dp"
+        android:layout_height="5dp"/>
+
+
+    <RelativeLayout
+        android:id="@+id/layout3"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/view3">
+
+         <ImageView
+             android:id="@+id/image1"
+             android:layout_width="60dp"
+             android:layout_height="60dp"
+             android:layout_marginStart="20dp"
+             android:src="@drawable/dot_image"/>
+
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="100dp"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:rotation="90"
+            android:progress="100"
+            android:translationY="-15dp"
+            android:layout_below="@id/image1"
+            android:layout_height="80dp"/>
+
+
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:translationY="-35dp"
+            android:layout_below="@id/progress"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/dot_image"/>
+
+
+
+
+
+        <TextView
+            android:id="@+id/text8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ordered"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:translationX="-10dp"
+            android:layout_toEndOf="@id/image1"
+            android:textStyle="bold"/>
+
+
+
+        <TextView
+            android:id="@+id/text9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mon 12 sep, 2023"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:translationX="-10dp"
+            android:layout_toEndOf="@id/text8"/>
+
+
+        <TextView
+            android:id="@+id/text10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Order Has been Placed"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/text8"
+            android:layout_toEndOf="@id/progress"
+            android:translationX="-20dp"/>
+
+
+
+        <TextView
+            android:id="@+id/text11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ordered Delivered"
+            android:textColor="@color/black"
+            android:textSize="17dp"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/text10"
+            android:layout_marginTop="33dp"
+            android:layout_toEndOf="@id/image2"/>
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
