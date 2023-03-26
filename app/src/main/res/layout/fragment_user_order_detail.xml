@@ -10,6 +10,9 @@ tools:context=".UserPage.UserOrderDetailFragment">
 
 <!--    Topbar-->
 
+
+
+
 <RelativeLayout
     android:id="@+id/topbar"
     android:layout_width="match_parent"
@@ -65,12 +68,26 @@ tools:context=".UserPage.UserOrderDetailFragment">
         android:layout_below="@id/topbar"
         android:layout_height="5dp"/>
 
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view1"
+        android:layout_marginTop="10dp">
+
+
+        <RelativeLayout
+            android:id="@+id/layoutscroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
 <RelativeLayout
     android:id="@+id/layout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_below="@id/view1">
+    android:layout_marginTop="10dp">
 
     <TextView
         android:id="@+id/text1"
@@ -259,10 +276,23 @@ tools:context=".UserPage.UserOrderDetailFragment">
         android:layout_below="@id/view2"
         android:layout_marginTop="10dp">
 
+
+        <TextView
+            android:id="@+id/text12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ordered Item"
+            android:textSize="15dp"
+            android:layout_marginStart="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/purple_500"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler1"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/text12"
+            android:layout_marginTop="10dp"
             tools:listitem="@layout/row_orderdetail_user"/>
 
 
@@ -361,7 +391,7 @@ tools:context=".UserPage.UserOrderDetailFragment">
 
 
         <TextView
-            android:id="@+id/text11"
+            android:id="@+id/orderdeliverTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ordered Delivered"
@@ -374,11 +404,13 @@ tools:context=".UserPage.UserOrderDetailFragment">
             android:layout_toEndOf="@id/image2"/>
 
 
-
-
     </RelativeLayout>
 
 
+
+        </RelativeLayout>
+
+    </ScrollView>
 
 
 </RelativeLayout>
