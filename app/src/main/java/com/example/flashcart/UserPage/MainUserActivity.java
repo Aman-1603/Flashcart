@@ -62,6 +62,9 @@ public class MainUserActivity extends AppCompatActivity {
 
                     break;
                 case R.id.Notification:
+
+                    replaceFragment(new UserFinalOrder_Success_Fail_messageshow());
+
                     break;
                 case R.id.Cart:
 

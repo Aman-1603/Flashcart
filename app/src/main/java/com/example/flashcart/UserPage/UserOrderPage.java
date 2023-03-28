@@ -3,7 +3,10 @@ package com.example.flashcart.UserPage;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,12 +14,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.flashcart.Adaptor.AdaptorOrderUser;
 import com.example.flashcart.Model.ModelOrderUser;
 import com.example.flashcart.Model.ModelShop;
 import com.example.flashcart.R;
+import com.example.flashcart.User_review_write_fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +39,8 @@ public class UserOrderPage extends Fragment {
     FirebaseAuth firebaseAuth;
     private ArrayList<ModelOrderUser> orderList;
     AdaptorOrderUser adaptorOrderUser;
+
+    Button review;
 
     
 
@@ -55,8 +62,11 @@ public class UserOrderPage extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        review = view.findViewById(R.id.reviewbutton);
+
 
         firebaseAuth = FirebaseAuth.getInstance();
+
 
 
 

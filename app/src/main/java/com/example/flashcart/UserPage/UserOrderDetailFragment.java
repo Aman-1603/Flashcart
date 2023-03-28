@@ -4,7 +4,10 @@ import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,12 +15,14 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.flashcart.Adaptor.AdaptorOrderDetailUser;
 import com.example.flashcart.Model.ModelCartItemRecieve;
 import com.example.flashcart.R;
+import com.example.flashcart.User_review_write_fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,6 +42,8 @@ public class UserOrderDetailFragment extends Fragment {
     TextView orderdetailId,orderdetaildate,orderdetailstatus,orderdetailshopname,orderdetailitem,orderdetailfinalamount,orderdetailaddress;
     RecyclerView recycler1;
 
+
+    Button review;
     TextView orderdate,orderdeliverTv;
 
     ProgressBar progressBar;
@@ -71,6 +78,7 @@ public class UserOrderDetailFragment extends Fragment {
         orderdate  = view.findViewById(R.id.text9);
         progressBar = view.findViewById(R.id.progress);
         orderdeliverTv = view.findViewById(R.id.orderdeliverTv);
+        review = view.findViewById(R.id.reviewbutton);
 
 
         recycler1 = view.findViewById(R.id.recycler1);
@@ -86,6 +94,37 @@ public class UserOrderDetailFragment extends Fragment {
             orderTo = bundle.getString("orderTo");
             orderId = bundle.getString("orderId");
         }
+
+        review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("shopUid",orderTo); // add the data to the bundle using a key-value pair
+
+                // Create an instance of the new fragment
+                User_review_write_fragment newFragment = new User_review_write_fragment();
+
+                // Set the arguments for the new fragment to the bundle
+                newFragment.setArguments(bundle);
+
+                // Get the fragment manager
+                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+            }
+        });
+
 
 
         loadshopInfo();

@@ -290,7 +290,7 @@ tools:context=".UserPage.UserOrderDetailFragment">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="200dp"
             android:layout_below="@id/text12"
             android:layout_marginTop="10dp"
             tools:listitem="@layout/row_orderdetail_user"/>
@@ -310,8 +310,8 @@ tools:context=".UserPage.UserOrderDetailFragment">
 
     <RelativeLayout
         android:id="@+id/layout3"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_below="@id/view3">
 
@@ -406,6 +406,71 @@ tools:context=".UserPage.UserOrderDetailFragment">
 
     </RelativeLayout>
 
+
+            <View
+                android:id="@+id/view4"
+                android:background="#EDEBEB"
+                android:layout_width="match_parent"
+                android:layout_below="@id/layout3"
+                android:layout_marginTop="10dp"
+                android:layout_height="5dp"/>
+
+
+            <RelativeLayout
+                android:id="@+id/layout4"
+                android:layout_below="@id/view4"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/violet_circular_border"
+                android:layout_width="match_parent"
+                android:layout_height="150dp">
+
+
+                <TextView
+                    android:id="@+id/text13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_alignParentStart="true"
+                    android:text="Write Your review"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+
+                <RatingBar
+                    android:id="@+id/rating1"
+                    android:layout_width="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"/>
+
+
+
+                <Button
+                    android:id="@+id/reviewbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text13"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/shape_rec07"
+                    android:layout_marginTop="40dp"
+                    android:text="Write Your Review"/>
+
+
+
+
+            </RelativeLayout>
+
+
+
+            <View
+                android:id="@+id/view5"
+                android:background="#EDEBEB"
+                android:layout_width="match_parent"
+                android:layout_below="@id/layout4"
+                android:layout_marginTop="10dp"
+                android:layout_height="50dp"/>
 
 
         </RelativeLayout>
