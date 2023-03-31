@@ -18,6 +18,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import com.example.flashcart.Adaptor.AdaptorUserShopProduct;
 import com.example.flashcart.Model.ModelProduct;
 import com.example.flashcart.Model.ModelShop;
 import com.example.flashcart.R;
+import com.example.flashcart.User_review_write_fragment;
 import com.example.flashcart.categorylist.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -63,6 +65,8 @@ public class UserShowShopDetail extends Fragment {
 
     private AdaptorUserShopProduct adaptorUserShopProduct;
 
+    ImageButton reviewButton;
+
 
 
 
@@ -93,6 +97,8 @@ public class UserShowShopDetail extends Fragment {
         logoutbtn = view.findViewById(R.id.logoutbtn);
         flterproductTv = view.findViewById(R.id.flterproductTv);
         searchproductEt1 = view.findViewById(R.id.searchproductEt1);
+        reviewButton = view.findViewById(R.id.reviewbtn);
+
 
 
 
@@ -105,6 +111,8 @@ public class UserShowShopDetail extends Fragment {
         }
 
 
+
+
         flterproductTv.setText(shopUid);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -112,6 +120,39 @@ public class UserShowShopDetail extends Fragment {
         loadMyInfo();
         loadShopDetail();
         loadShopProducts();
+
+
+
+        reviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("shopUid",shopUid); // add the data to the bundle using a key-value pair
+
+                // Create an instance of the new fragment
+                User_Shop_AllReview_fragment newFragment = new User_Shop_AllReview_fragment();
+
+                // Set the arguments for the new fragment to the bundle
+                newFragment.setArguments(bundle);
+
+                // Get the fragment manager
+                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+
+            }
+        });
 
 
         backbtn.setOnClickListener(new View.OnClickListener() {

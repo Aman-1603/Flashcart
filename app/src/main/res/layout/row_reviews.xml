@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="1dp"
+    app:cardElevation="3dp"
+    app:contentPadding="5dp"
+    android:background="@drawable/violet_circular_border">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/violet_circular_border"
+        android:padding="15dp">
+
+        <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+            android:id="@+id/UserprofileTV"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/baseline_store_24"
+            app:c_border="true"
+            app:c_border_width="1dp"
+            app:c_border_color="@color/grey_font"/>
+
+        <!--        online and offline status-->
+
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/UserprofileTV"
+            android:text="User Name"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+
+        <RatingBar
+            android:id="@+id/ratingBarTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:numStars="5"
+            android:rating="3.5"
+            android:layout_below="@id/UserprofileTV"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="end"/>
+
+        <TextView
+            android:id="@+id/reviewdate"
+            android:text="31/03/2023"
+            android:layout_toEndOf="@id/ratingBarTV"
+            android:layout_below="@id/UserprofileTV"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/reviewtext"
+            android:layout_below="@id/ratingBarTV"
+            android:layout_marginTop="20dp"
+            android:text="Very good Shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageView
+            android:id="@+id/nextTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_navigate_next_24"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
