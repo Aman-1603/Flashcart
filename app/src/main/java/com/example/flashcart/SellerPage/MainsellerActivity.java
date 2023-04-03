@@ -51,6 +51,9 @@ public class MainsellerActivity extends AppCompatActivity {
 //                case R.id.Notification:
 //                    break;
                 case R.id.Orders:
+
+                    replaceFragment(new SellerShowOrder());
+
                     break;
 
                 case R.id.Banner:

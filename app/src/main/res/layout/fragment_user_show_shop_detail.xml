@@ -205,7 +205,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/shape_rec02"
+            android:background="@drawable/rect_search"
             android:drawableStart="@drawable/baseline_search_24"
             android:drawablePadding="10dp"
             android:hint="Search here..."
