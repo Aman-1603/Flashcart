@@ -5,12 +5,15 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.flashcart.Filter.FilterOrderShop;
 import com.example.flashcart.Model.ModelOrderShop;
 import com.example.flashcart.R;
 import com.google.firebase.database.DataSnapshot;
@@ -22,15 +25,17 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class AdaptorOrderShop extends RecyclerView.Adapter<AdaptorOrderShop.HolderOrderShop>{
+public class AdaptorOrderShop extends RecyclerView.Adapter<AdaptorOrderShop.HolderOrderShop> implements Filterable {
 
 
     private Context context;
-    public ArrayList<ModelOrderShop> orderShopArrayList;
+    public ArrayList<ModelOrderShop> orderShopArrayList,FilterList;
+    private FilterOrderShop filter;
 
     public AdaptorOrderShop(Context context, ArrayList<ModelOrderShop> orderShopArrayList) {
         this.context = context;
         this.orderShopArrayList = orderShopArrayList;
+        this.FilterList = orderShopArrayList;
     }
 
     @NonNull
@@ -109,6 +114,18 @@ public class AdaptorOrderShop extends RecyclerView.Adapter<AdaptorOrderShop.Hold
     @Override
     public int getItemCount() {
         return orderShopArrayList.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+
+        if (filter == null){
+
+            filter = new FilterOrderShop(this,FilterList);
+
+        }
+
+        return filter;
     }
 
     class HolderOrderShop extends RecyclerView.ViewHolder{

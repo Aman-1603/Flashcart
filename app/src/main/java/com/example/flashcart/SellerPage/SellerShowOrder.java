@@ -1,5 +1,7 @@
 package com.example.flashcart.SellerPage;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.flashcart.Adaptor.AdaptorOrderShop;
 import com.example.flashcart.Model.ModelOrderShop;
@@ -32,6 +35,8 @@ public class SellerShowOrder extends Fragment {
     ImageButton filterproductBtn;
     RecyclerView OrderRvSeller;
 
+    TextView textshowstatus;
+
     FirebaseAuth firebaseAuth;
 
     ArrayList<ModelOrderShop> orderShopArrayList;
@@ -51,6 +56,7 @@ public class SellerShowOrder extends Fragment {
 
         searchproductEt1 = view.findViewById(R.id.searchproductEt1);
         filterproductBtn = view.findViewById(R.id.filterproductBtn);
+        textshowstatus = view.findViewById(R.id.textshowstatus);
 
         OrderRvSeller = view.findViewById(R.id.OrderRvSeller);
 
@@ -60,6 +66,40 @@ public class SellerShowOrder extends Fragment {
 
 
 
+        filterproductBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String[] options = {"All", "In Progress", "Complete", "Cancelled"};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Filters Orders")
+                        .setItems(options, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                if (which == 0){
+
+                                    textshowstatus.setText("Showing All Products");
+                                    adaptorOrderShop.getFilter().filter("");  //we pass nothing showing all products
+
+
+
+                                }else {
+
+                                    String optionClicked = options[which];
+                                    textshowstatus.setText("Showing " + optionClicked + " orders");
+                                    adaptorOrderShop.getFilter().filter(optionClicked);
+
+                                }
+
+                            }
+                        })
+                        .show();
+
+            }
+        });
 
         return  view;
     }
