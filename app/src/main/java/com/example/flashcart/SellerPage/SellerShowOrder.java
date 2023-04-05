@@ -31,11 +31,15 @@ import java.util.ArrayList;
 public class SellerShowOrder extends Fragment {
 
 
+    TextView product_title;
+
     EditText searchproductEt1;
     ImageButton filterproductBtn;
     RecyclerView OrderRvSeller;
 
     TextView textshowstatus;
+
+
 
     FirebaseAuth firebaseAuth;
 
@@ -57,6 +61,8 @@ public class SellerShowOrder extends Fragment {
         searchproductEt1 = view.findViewById(R.id.searchproductEt1);
         filterproductBtn = view.findViewById(R.id.filterproductBtn);
         textshowstatus = view.findViewById(R.id.textshowstatus);
+
+        product_title = view.findViewById(R.id.product_title);
 
         OrderRvSeller = view.findViewById(R.id.OrderRvSeller);
 
@@ -132,11 +138,15 @@ public class SellerShowOrder extends Fragment {
 
                     }
 
+
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
 
                     }
                 });
+
+
+
 
     }
 }

@@ -1,6 +1,7 @@
 package com.example.flashcart.Adaptor;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.flashcart.Filter.FilterOrderShop;
 import com.example.flashcart.Model.ModelOrderShop;
 import com.example.flashcart.R;
+import com.example.flashcart.SellerOrderDetailFragmnet;
+import com.example.flashcart.UserPage.UserOrderDetailFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -79,12 +85,48 @@ public class AdaptorOrderShop extends RecyclerView.Adapter<AdaptorOrderShop.Hold
         }
 
 
-
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.parseLong(orderTime));
         String formateDate = DateFormat.format("dd/MM/yyyy",calendar).toString();
 
         holder.orderdateTv.setText(formateDate);
+
+
+
+        holder.orderNextTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("orderId",orderId);
+                bundle.putString("orderBy",orderBy);
+
+
+                SellerOrderDetailFragmnet newFragment = new SellerOrderDetailFragmnet();
+
+
+                newFragment.setArguments(bundle);
+                // Get the fragment manager
+                FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+
+
+            }
+        });
+
+
+
 
     }
 

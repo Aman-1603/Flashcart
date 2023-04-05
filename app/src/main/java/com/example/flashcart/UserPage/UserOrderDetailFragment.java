@@ -212,9 +212,31 @@ public class UserOrderDetailFragment extends Fragment {
                         String formatdate = DateFormat.format("dd/MM/yyyy hh:mm a",calendar).toString();
 
 
+//                        if (orderStatus.equals("In Progress")){
+//                            orderdetailstatus.setTextColor(getResources().getColor(R.color.purple_200));
+//                            progressBar.setProgress(50);
+//
+//
+//                        } else if (orderStatus.equals("Complete")) {
+//                            orderdetailstatus.setTextColor(getResources().getColor(R.color.colorGreen1));
+//                            progressBar.setProgress(100);
+//
+//                        } else if (orderStatus.equals("Cancelled")) {
+//
+//                            orderdetailstatus.setTextColor(getResources().getColor(R.color.red));
+//                            progressBar.setProgress(100);
+//                            progressBar.setProgressTintList(ColorStateList.valueOf(getResources().getColor(R.color.red)));
+//                            orderdeliverTv.setText("Order Cancelled");
+//                            orderdeliverTv.setTextColor(getResources().getColor(R.color.red));
+//
+//
+//                        }
+
+
+
                         if (orderStatus.equals("In Progress")){
                             orderdetailstatus.setTextColor(getResources().getColor(R.color.purple_200));
-                            progressBar.setProgress(50);
+                            progressBar.setProgress(10);
 
 
                         } else if (orderStatus.equals("Complete")) {
@@ -228,6 +250,36 @@ public class UserOrderDetailFragment extends Fragment {
                             progressBar.setProgressTintList(ColorStateList.valueOf(getResources().getColor(R.color.red)));
                             orderdeliverTv.setText("Order Cancelled");
                             orderdeliverTv.setTextColor(getResources().getColor(R.color.red));
+
+
+                        }
+                        else if (orderStatus.equals("Order Packed")) {
+
+                            orderdetailstatus.setTextColor(getResources().getColor(R.color.purple_200));
+                            progressBar.setProgress(30);
+
+
+                        }
+                        else if (orderStatus.equals("Order Shipped")) {
+
+                            orderdetailstatus.setTextColor(getResources().getColor(R.color.purple_500));
+                            progressBar.setProgress(50);
+
+
+                        }
+
+                        else if (orderStatus.equals("Order Arrived to Your Near location")) {
+
+                            orderdetailstatus.setTextColor(getResources().getColor(R.color.purple_700));
+                            progressBar.setProgress(70);
+
+
+
+                        }
+                        else if (orderStatus.equals("Order out for delivery")) {
+
+                            orderdetailstatus.setTextColor(getResources().getColor(R.color.purple_700));
+                            progressBar.setProgress(80);
 
 
                         }
