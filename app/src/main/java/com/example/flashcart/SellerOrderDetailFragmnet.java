@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +31,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -47,7 +55,7 @@ public class SellerOrderDetailFragmnet extends Fragment {
 
     String sourceLatitude,sourceLongitude,destinationLatitude,destinationLongitude;
 
-    FloatingActionButton goMap,EditOrderStatus;
+    FloatingActionButton goMap,EditOrderStatus,generatepdf;
 
     RecyclerView recycler1;
 
@@ -87,6 +95,7 @@ public class SellerOrderDetailFragmnet extends Fragment {
         totalitemTv = view.findViewById(R.id.totalitemTv);
         goMap = view.findViewById(R.id.goMap);
         EditOrderStatus = view.findViewById(R.id.EditOrderStatus);
+        generatepdf = view.findViewById(R.id.generatepdf);
 
         recycler1 = view.findViewById(R.id.recycler1);
 
@@ -115,10 +124,114 @@ public class SellerOrderDetailFragmnet extends Fragment {
             }
         });
 
+        generatepdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                generatepdf();
+            }
+        });
+
 
 
         return view;
     }
+
+    private void generatepdf() {
+
+        try {
+            String fileName = "order_detail.pdf";
+            String filePath = getContext().getExternalFilesDir(null) + "/" + fileName;
+            File file = new File(filePath);
+            file.getParentFile().mkdirs();
+
+            PdfWriter writer = new PdfWriter(filePath);
+            PdfDocument pdf = new PdfDocument(writer);
+
+
+
+
+
+            Document document = new Document(pdf);
+
+            // Retrieve store name from where it is stored in your app
+            // Add store name to the PDF document
+            Paragraph storeNameParagraph = new Paragraph("FlashCart");
+            storeNameParagraph.setTextAlignment(TextAlignment.CENTER);
+            storeNameParagraph.setFontSize(24);
+            storeNameParagraph.setFontColor(ColorConstants.BLUE);
+            document.add(storeNameParagraph);
+
+
+
+
+
+            // Add order details to the PDF document
+            document.add(new Paragraph("Order Details"));
+            document.add(new Paragraph("Order ID: " + OrderId));
+            document.add(new Paragraph("Order By: " + OrderBy));
+            document.add(new Paragraph("Order Date: " + orderdetaildate.getText().toString()));
+            document.add(new Paragraph("Order Status: " + orderdetailstatus.getText().toString()));
+            document.add(new Paragraph("Shop Name: " + orderdetailshopname.getText().toString()));
+            document.add(new Paragraph("Phone: " + orderdetailphone.getText().toString()));
+            document.add(new Paragraph("Address: " + orderdetailaddress.getText().toString()));
+            document.add(new Paragraph("Subtotal: " + subtotalTv.getText().toString()));
+            document.add(new Paragraph("Total Items: " + totalitemTv.getText().toString()));
+
+            // Add order items to the PDF document
+            document.add(new Paragraph("Order Items"));
+            for (ModelCartItemRecieve orderItem : orderUserArrayList) {
+                document.add(new Paragraph(orderItem.getItemUid() + " - " + orderItem.getPrice() + " - " + orderItem.getQuantity()));
+            }
+
+            document.close();
+
+            Toast.makeText(getContext(), "PDF Generated Successfully", Toast.LENGTH_SHORT).show();
+
+            // Open the PDF file
+//            Intent intent = new Intent(Intent.ACTION_VIEW);
+//            intent.setDataAndType(Uri.fromFile(file), "application/pdf");
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+//            startActivity(intent);
+
+
+
+//            sendPDFviaSMS(orderdetailphone,filePath);
+
+
+            // Open the PDF file
+            Uri pdfUri = FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".provider", file);
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setDataAndType(pdfUri, "application/pdf");
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(getContext(), "Error Generating PDF", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+//    private void sendPDFviaSMS(TextView orderdetailphone, String filePath) {
+//
+//        try {
+//            File file = new File(filePath);
+//            Uri uri = FileProvider.getUriForFile(getContext(), getContext().getApplicationContext().getPackageName() + ".provider", file);
+//
+//            Intent intent = new Intent(Intent.ACTION_SEND);
+//            intent.putExtra("address", orderdetailphone.toString());
+//            intent.putExtra(Intent.EXTRA_STREAM, uri);
+//            intent.setType("application/pdf");
+//            intent.setPackage("com.android.mms");
+//            startActivity(intent);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Toast.makeText(getContext(), "Error sending PDF", Toast.LENGTH_SHORT).show();
+//        }
+//
+//    }
 
     private void editOrderStatusDialog() {
 
