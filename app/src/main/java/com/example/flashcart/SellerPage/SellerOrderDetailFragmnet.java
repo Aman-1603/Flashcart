@@ -1,4 +1,4 @@
-package com.example.flashcart;
+package com.example.flashcart.SellerPage;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -20,8 +20,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.flashcart.Adaptor.AdaptorOrderDetailUser;
 import com.example.flashcart.Model.ModelCartItemRecieve;
+import com.example.flashcart.R;
+import com.example.flashcart.categorylist.Constants;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -38,10 +45,13 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class SellerOrderDetailFragmnet extends Fragment {
@@ -262,12 +272,19 @@ public class SellerOrderDetailFragmnet extends Fragment {
         ref.child(firebaseAuth.getUid()).child("Orders").child(OrderId)
                 .updateChildren(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                    String message = "Order is Now"+selectedOption;
+
                     @Override
                     public void onSuccess(Void unused) {
 
                         Toast.makeText(getContext(), "Status Updated Successfully", Toast.LENGTH_SHORT).show();
 
                         loadOredrDetails();
+
+                        prepareNotificationMessage(OrderId,message);
+
+                    //    Toast.makeText(getContext(), "prepareNotificationMessage(OrderId,message)"+ "Checked", Toast.LENGTH_SHORT).show();
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -494,6 +511,102 @@ public class SellerOrderDetailFragmnet extends Fragment {
 
                     }
                 });
+
+    }
+
+
+
+
+
+
+
+    //when seller change order status send data
+    private void prepareNotificationMessage(String orderId, String message){
+
+        //when user Place order,send notification to user
+
+        //prepare data for notifications
+        String NOTIFICATION_TOPIC = "/topics" + Constants.FCM_TOPIC; //must be same as subscriber by user
+        String NOTIFICATION_TITLE = "Your Order " + orderId;
+        String NOTIFICATION_MESSAGE = ""+message;
+        String NOTIFICATION_TYPE = "OrderStatusChanged";
+
+        //now perpare jason (What to send and where to send)
+
+        JSONObject notificationJo = new JSONObject();
+        JSONObject notificationBodyJo = new JSONObject();
+
+        try {
+            //what to send
+            notificationBodyJo.put("notificationType",NOTIFICATION_TYPE);
+            notificationBodyJo.put("buyerUid",OrderBy);
+            notificationBodyJo.put("sellerUid",firebaseAuth.getUid());
+            notificationBodyJo.put("orderId",orderId);
+            notificationBodyJo.put("notificationTitle",NOTIFICATION_TITLE);
+            notificationBodyJo.put("notificationMessage",NOTIFICATION_MESSAGE);
+
+            //where to send
+
+            notificationJo.put("to",NOTIFICATION_TOPIC); // to all who subscribed to these topic
+            notificationJo.put("data",notificationBodyJo);
+
+
+
+        }catch (Exception e){
+
+            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+
+        sendFcmNotification(notificationJo);
+
+    }
+
+    private void sendFcmNotification(JSONObject notificationJo) {
+
+        //send volley request
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://fcm.googleapis.com/fcm/send", notificationJo, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                //notification sent
+
+                Toast.makeText(getContext(), "response on sendfmc jasonrequest", Toast.LENGTH_LONG).show();
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                //notification faild to send
+
+                Toast.makeText(getContext(), ""+ error.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
+                //put required headers
+
+                Map<String,String> header = new HashMap<>();
+                header.put("Content_Type", "application/jason");
+                header.put("Authorization","key" + Constants.FCM_KEY);
+
+
+                return header;
+
+            }
+        };
+
+
+        //enque the volly request
+
+        Volley.newRequestQueue(getContext()).add(jsonObjectRequest);
+
+
 
     }
 

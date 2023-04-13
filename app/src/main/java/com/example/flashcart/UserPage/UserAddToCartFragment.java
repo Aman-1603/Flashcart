@@ -1,5 +1,6 @@
 package com.example.flashcart.UserPage;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
@@ -16,9 +17,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.flashcart.Adaptor.AdaptorCartItem;
 import com.example.flashcart.Model.ModelCartItemRecieve;
 import com.example.flashcart.R;
+import com.example.flashcart.categorylist.Constants;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,12 +34,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
-public class UserAddToCartFragment extends Fragment {
+
+
+
+public class UserAddToCartFragment extends Fragment implements PaymentResultListener {
 
     RecyclerView recyclerView;
     FirebaseAuth firebaseAuth;
@@ -112,7 +127,12 @@ public class UserAddToCartFragment extends Fragment {
 
                 }
 
+
+                PaymentNow("1");
+
                 submitOrder();
+
+
 
 
             }
@@ -120,6 +140,43 @@ public class UserAddToCartFragment extends Fragment {
 
 
         return view;
+    }
+
+    private void PaymentNow(String subtotalPrice) {
+
+        final Activity activity = getActivity();
+
+        Checkout checkout = new Checkout();
+
+        checkout.setKeyID("rzp_test_Xhoi5wf0u1ChSi");
+        checkout.setImage(R.drawable.ic_launcher_background);
+
+        double finalamount = Float.parseFloat(subtotalPrice)*100;
+
+
+        try {
+
+            JSONObject option = new JSONObject();
+            option.put("Name","Aman");
+            option.put("description","orderId");
+            option.put("Image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+            option.put("theme.color","#3399cc");
+            option.put("Currency","₹");
+            option.put("Final Amount",finalamount);
+            option.put("Name","ansariaman1603@gmail.com");
+            option.put("Contact","9265413820");
+
+
+            checkout.open(getActivity(),option);
+
+
+
+        }catch (Exception e){
+
+            Toast.makeText(activity, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+
     }
 
     private void submitOrder() {
@@ -141,6 +198,8 @@ public class UserAddToCartFragment extends Fragment {
         hashMap.put("orderBy",""+firebaseAuth.getUid());
         hashMap.put("orderTo",""+shopUid);
         hashMap.put("orderFinalSubTotal",""+subtotalPrice);
+
+
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users").child(shopUid).child("Orders");
@@ -178,6 +237,12 @@ public class UserAddToCartFragment extends Fragment {
 
                         Toast.makeText(getContext(), "Order Placed Successfully", Toast.LENGTH_SHORT).show();
                         progressDialog.dismiss();
+
+                        prepareNotificationMessage(timestamp);
+
+                        //now next code which will show order success page will go in
+
+//                        public void onResponse(JSONObject response)
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -310,4 +375,103 @@ public class UserAddToCartFragment extends Fragment {
     }
 
 
+    private void prepareNotificationMessage(String orderId){
+
+        //when user Place order,send notification to user
+
+        //prepare data for notifications
+        String NOTIFICATION_TOPIC = "/topics" + Constants.FCM_TOPIC; //must be same as subscriber by user
+        String NOTIFICATION_TITLE = "New Order " + orderId;
+        String NOTIFICATION_MESSAGE = "Congratulations you have new order !....";
+        String NOTIFICATION_TYPE = "NewOrder";
+
+        //now perpare jason (What to send and where to send)
+
+        JSONObject notificationJo = new JSONObject();
+        JSONObject notificationBodyJo = new JSONObject();
+
+        try {
+            //what to send
+            notificationBodyJo.put("notificationType",NOTIFICATION_TYPE);
+            notificationBodyJo.put("buyerUid",firebaseAuth.getUid());
+            notificationBodyJo.put("sellerUid",shopUid);
+            notificationBodyJo.put("orderId",orderId);
+            notificationBodyJo.put("notificationTitle",NOTIFICATION_TITLE);
+            notificationBodyJo.put("notificationMessage",NOTIFICATION_MESSAGE);
+
+            //where to send
+
+            notificationJo.put("to",NOTIFICATION_TOPIC); // to all who subscribed to these topic
+            notificationJo.put("data",notificationBodyJo);
+
+
+
+        }catch (Exception e){
+
+            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+
+        sendFcmNotification(notificationJo,orderId);
+
+    }
+
+    private void sendFcmNotification(JSONObject notificationJo, String orderId) {
+
+        //send volley request
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://fcm.googleapis.com/fcm/send", notificationJo, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                //after sending fcm startorderactivity
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                //if failed sending fcm, still start  order activity
+
+
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+
+                //put required headers
+
+                Map<String,String> header = new HashMap<>();
+                header.put("Content_Type", "application/jason");
+                header.put("Authorization","key" + Constants.FCM_KEY);
+
+
+                return header;
+
+            }
+        };
+
+
+        //enque the volly request
+
+        Volley.newRequestQueue(getContext()).add(jsonObjectRequest);
+
+
+
+    }
+
+
+    @Override
+    public void onPaymentSuccess(String s) {
+
+        Toast.makeText(getContext(), "Payment success", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+
+        Toast.makeText(getContext(), "Payment failed", Toast.LENGTH_SHORT).show();
+
+    }
 }

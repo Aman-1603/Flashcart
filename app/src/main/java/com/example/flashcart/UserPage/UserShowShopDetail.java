@@ -419,7 +419,6 @@ public class UserShowShopDetail extends Fragment {
                     }
                 });
 
-
     }
 
 

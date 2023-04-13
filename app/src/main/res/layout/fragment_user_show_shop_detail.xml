@@ -6,6 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UserPage.UserShowShopDetail">
 
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
 <RelativeLayout
     android:id="@+id/shopdetail"
     android:layout_width="match_parent"
@@ -22,6 +32,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="#79000000"/>
+
+
+
 
 
     <RelativeLayout
@@ -105,6 +118,8 @@
 
         <LinearLayout
 
+            android:id="@+id/layout1"
+
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -129,12 +144,50 @@
 
 
 
+
     </RelativeLayout>
+
+
+
+<!--    cardview-->
+
 
 </RelativeLayout>
 
 
-<!--    Toolbar-->
+            <RelativeLayout
+                android:id="@+id/sliderlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shopdetail">
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <!--                    app:cardCornerRadius="10dp">-->
+
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/image_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    app:iss_auto_cycle="true"
+                    app:iss_delay="1000"
+                    app:iss_period="2000"/>
+
+
+                </androidx.cardview.widget.CardView>
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+            <!--    Toolbar-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -194,7 +247,7 @@
         android:id="@+id/productRl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/shopdetail">
+        android:layout_below="@id/sliderlayout">
 
 
         <EditText
@@ -225,6 +278,8 @@
 
 
 
+
+
         <TextView
             android:id="@+id/flterproductTv"
             android:layout_width="wrap_content"
@@ -248,6 +303,10 @@
     </RelativeLayout>
 
 
+
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 
 </RelativeLayout>

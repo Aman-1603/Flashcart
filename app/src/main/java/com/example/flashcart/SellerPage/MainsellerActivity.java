@@ -63,6 +63,9 @@ public class MainsellerActivity extends AppCompatActivity {
                     break;
 
                 case R.id.Account:
+
+                    replaceFragment(new Seller_Account_page_Fragment());
+
                     break;
 
             }

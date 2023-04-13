@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".SellerPage.Seller_Account_page_Fragment">
 
-    <RelativeLayout
-        android:id="@+id/parent_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        tools:context=".UserPage.UserProfilePageFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -97,7 +93,7 @@
             android:id="@+id/profilebutton1"
             android:layout_width="180dp"
             android:layout_height="60dp"
-            android:text="Your Order"
+            android:text="Order"
             android:textStyle="bold"
             android:layout_marginStart="10dp"
             android:background="@drawable/shape_circle03"/>
@@ -108,7 +104,7 @@
             android:layout_width="180dp"
             android:layout_height="60dp"
             android:layout_marginEnd="10dp"
-            android:text="Buy Again"
+            android:text="Total Income"
             android:layout_alignParentEnd="true"
             android:background="@drawable/shape_circle03"/>
 
@@ -131,11 +127,11 @@
             android:layout_marginTop="10dp"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="10dp"
-            android:text="Your WishList"
+            android:text="Todays Income"
             android:layout_below="@id/profilebutton2"
             android:background="@drawable/shape_circle03"/>
 
-       </RelativeLayout>
+    </RelativeLayout>
 
 
     <View
@@ -204,7 +200,7 @@
             android:id="@+id/text2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Your Wish List"
+            android:text="Setting Lists"
             android:textSize="17dp"
             android:textColor="@color/black"
             android:layout_marginStart="10dp"
@@ -244,19 +240,35 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_marginEnd="5dp"
-                    android:layout_alignParentEnd="true"
                     android:src="@drawable/oneplus1"
                     app:c_border="true"
+                    android:layout_centerHorizontal="true"
                     app:c_border_width="1dp"
                     app:c_border_color="@color/grey_font"/>
 
 
-                <TextView
-                    android:id="@+id/text4"
-                    android:text="Shopping List"
-                    android:textColor="@color/black"
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/notificationswitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/shopTV"
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
+                    android:background="@drawable/shape_rec04"
+                    android:paddingLeft="10dp"
+                    android:text="Push Notification"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/notificationStatusTv"
+                    android:text="Notifications are disabled"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:layout_below="@id/notificationswitch"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
 
@@ -279,96 +291,7 @@
             android:layout_marginEnd="10dp"
             android:layout_height="6dp"/>
 
-        <RelativeLayout
-            android:id="@+id/layoutfive"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/view3"
-            android:layout_marginTop="10dp">
 
-            <TextView
-                android:id="@+id/text14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Setting Lists"
-                android:textSize="17dp"
-                android:textColor="@color/black"
-                android:layout_marginStart="10dp"
-                android:textStyle="bold"/>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card2"
-                android:layout_below="@id/text14"
-                android:layout_marginStart="10dp"
-                app:cardCornerRadius="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#BDBDBD"
-                    android:padding="15dp">
-
-                    <com.blogspot.atifsoftwares.circularimageview.CircularImageView
-                        android:id="@+id/image"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginEnd="5dp"
-                        android:src="@drawable/oneplus1"
-                        app:c_border="true"
-                        android:layout_centerHorizontal="true"
-                        app:c_border_width="1dp"
-                        app:c_border_color="@color/grey_font"/>
-
-
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/notificationswitch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/image"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/shape_rec04"
-                        android:paddingLeft="10dp"
-                        android:text="Push Notification"
-                        android:textColor="@color/black"
-                        android:textSize="18dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/notificationStatusTv"
-                        android:text="Notifications are disabled"
-                        android:textStyle="bold"
-                        android:textSize="16dp"
-                        android:layout_below="@id/notificationswitch"
-                        android:textColor="@color/black"
-                        android:layout_marginStart="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
-
-
-
-                </RelativeLayout>
-
-
-
-            </androidx.cardview.widget.CardView>
-
-
-
-        </RelativeLayout>
-
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="6dp"
-            android:layout_below="@id/layoutfive"/>
 
 
     </RelativeLayout>
@@ -383,60 +306,9 @@
 
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card3"
-            android:layout_marginStart="10dp"
-            app:cardCornerRadius="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#BDBDBD"
-                android:padding="15dp">
-
-                <com.blogspot.atifsoftwares.circularimageview.CircularImageView
-                    android:id="@+id/image3"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/oneplus1"
-                    app:c_border="true"
-                    app:c_border_width="1dp"
-                    app:c_border_color="@color/grey_font"/>
-
-
-                <TextView
-                    android:id="@+id/text16"
-                    android:text="Shopping List"
-                    android:textColor="@color/black"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerInParent="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-
-
-
-            </RelativeLayout>
-
-
-
-        </androidx.cardview.widget.CardView>
-
-
-
     </RelativeLayout>
 
 
+
+
 </RelativeLayout>
-
-
-    </ScrollView>
-
-
-

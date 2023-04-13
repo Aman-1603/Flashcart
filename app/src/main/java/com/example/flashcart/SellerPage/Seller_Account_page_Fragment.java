@@ -1,20 +1,16 @@
-package com.example.flashcart.UserPage;
+package com.example.flashcart.SellerPage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,25 +19,30 @@ import com.example.flashcart.R;
 import com.example.flashcart.categorylist.Constants;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.w3c.dom.Text;
 
-public class UserProfilePageFragment extends Fragment {
+public class Seller_Account_page_Fragment extends Fragment {
 
-
-    //setting page data
 
     TextView notificationStatusTv;
     SwitchCompat notificationswitch;
-
-
+    FirebaseAuth firebaseAuth;
 
     boolean isChecked = false;
 
 
 
+    //setting
+
     private static final String enableMessage = "Notification are enabled";
     private static final String disableMessage = "Notification are disabled";
+
+    //setting up to these
+
+
 
 
     //now need to save what is choose in switchbutton
@@ -49,14 +50,7 @@ public class UserProfilePageFragment extends Fragment {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor spEditor;
 
-
-    //upto these setting page
-
-
-
-    Button profilebutton1;
-
-    public UserProfilePageFragment() {
+    public Seller_Account_page_Fragment() {
         // Required empty public constructor
     }
 
@@ -66,42 +60,16 @@ public class UserProfilePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_user_profile_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_seller__account_page_, container, false);
 
-        profilebutton1 = view.findViewById(R.id.profilebutton1);
+
         notificationStatusTv = view.findViewById(R.id.notificationStatusTv);
         notificationswitch = view.findViewById(R.id.notificationswitch);
 
-        profilebutton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
+        firebaseAuth = FirebaseAuth.getInstance();
 
-                UserOrderPage newFragment = new UserOrderPage();
-
-
-                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
-
-                // Begin a new transaction
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                // Replace the previous fragment with the new fragment
-                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
-
-                // Add the transaction to the back stack so the user can navigate back to the previous fragment
-                fragmentTransaction.addToBackStack(null);
-
-                // Commit the transaction
-                fragmentTransaction.commit();
-
-            }
-        });
-
-
-
-
-        //setting
-
+        //init shared preference
 
         sharedPreferences = getActivity().getSharedPreferences("SETTINGS_SP", Context.MODE_PRIVATE);
 
@@ -134,8 +102,6 @@ public class UserProfilePageFragment extends Fragment {
 
             }
         });
-
-        //upto these
 
 
         return view;
@@ -170,8 +136,6 @@ public class UserProfilePageFragment extends Fragment {
                 });
 
 
-
-
     }
 
     private void unsubscribeToTopic(){
@@ -204,3 +168,7 @@ public class UserProfilePageFragment extends Fragment {
     }
 
 }
+
+
+
+//required for notification message : fmc server

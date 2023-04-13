@@ -1,222 +1,698 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".UserPage.UserHomeFragment">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <RelativeLayout
         android:id="@+id/layouttop"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:padding="10dp"
-        android:background="@drawable/shape_rec03">
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:background="@color/wallet_holo_blue_light">
 
-        <ImageButton
-            android:id="@+id/menubtn"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/baseline_menu_24"/>
-
-        <EditText
-            android:id="@+id/searchproductEt"
-            android:layout_width="350dp"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_toEndOf="@id/menubtn"
-            android:layout_marginBottom="5dp"
-            android:backgroundTint="@color/white"
-            android:background="@drawable/shape_rec02"
-            android:drawableStart="@drawable/baseline_search_24"
-            android:drawablePadding="10dp"
-            android:hint="Search here..."
-            android:padding="15dp" />
+            android:layout_centerVertical="true"
+            android:drawableStart="@drawable/baseline_menu_24"
+            android:layout_marginStart="15dp"
+            android:drawablePadding="15dp"/>
 
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableStart="@drawable/amazon"
+            android:layout_marginStart="53dp"
+            android:drawablePadding="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawableStart="@drawable/baseline_mic_24"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="15dp"
+            android:drawablePadding="15dp"/>
 
 
     </RelativeLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/wallet_holo_blue_light">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/search_background"
+                android:drawableStart="@drawable/baseline_search_24"
+                android:drawableEnd="@drawable/baseline_camera_alt_24"
+                android:drawablePadding="10dp"
+                android:hint="Search ...."
+                android:imeOptions="actionDone"
+                android:padding="6dp"
+                android:textColorHint="@color/black" />
+
+
+        </RelativeLayout>
+
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/layouttop"
-        app:cardCornerRadius="10dp">
-
-    <com.denzcoskun.imageslider.ImageSlider
-        android:id="@+id/image_slider"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_below="@id/layouttop"
-        app:iss_auto_cycle="true"
-        app:iss_delay="1000"
-        app:iss_period="2000"/>
+        android:layout_height="match_parent">
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
 
-    </androidx.cardview.widget.CardView>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#F3F0F0"/>
 
 
 
-    <LinearLayout
-        android:id="@+id/linear2"
-        android:layout_below="@id/cardview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:baselineAligned="false">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:id="@+id/category_electronic_accessories"
-            android:padding="5dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_shopping_cart_24"
-                android:layout_above="@+id/category_electronic_accessories_1"
-                android:layout_centerHorizontal="true"/>
-            <TextView
-                android:id="@+id/category_electronic_accessories_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="electronic"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:textAlignment="center"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:id="@+id/category_automotive"
-            android:padding="5dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_shopping_cart_24"
-                android:layout_above="@+id/category_automotive_1"
-                android:layout_centerHorizontal="true"/>
-            <TextView
-                android:id="@+id/category_automotive_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="automotive"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:textAlignment="center"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:id="@+id/category_electronic_devices"
-            android:padding="5dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_shopping_cart_24"
-                android:layout_above="@+id/category_electronic_devices_1"
-                android:layout_centerHorizontal="true"/>
-            <TextView
-                android:id="@+id/category_electronic_devices_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="electronicDevices"
-                android:textAlignment="center"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"/>
-        </RelativeLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_below="@id/linear2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:baselineAligned="false">
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:id="@+id/category_home_lifestyle"
-            android:padding="5dp"
-            >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_shopping_cart_24"
-                android:layout_above="@+id/category_home_lifestyle_1"
-                android:layout_centerHorizontal="true"/>
-            <TextView
-                android:id="@+id/category_home_lifestyle_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="homeLifestyle"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:textAlignment="center"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:id="@+id/category_home_appliance"
-            android:padding="5dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_shopping_cart_24"
-                android:layout_above="@+id/category_home_appliance_1"
-                android:layout_centerHorizontal="true"/>
-            <TextView
-                android:id="@+id/category_home_appliance_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="homeAppliance"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:textAlignment="center"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:id="@+id/category_health_and_beauty"
-            android:padding="5dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_shopping_cart_24"
-                android:layout_above="@+id/category_health_and_beauty_1"
-                android:layout_centerHorizontal="true"/>
-            <TextView
-                android:id="@+id/category_health_and_beauty_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="healthBeauty"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:textAlignment="center"/>
-        </RelativeLayout>
-    </LinearLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/layouttop">
+<!--                    app:cardCornerRadius="10dp">-->
+
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/image_slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/layouttop"
+                    app:iss_auto_cycle="true"
+                    app:iss_delay="1000"
+                    app:iss_period="2000"/>
+
+
+                </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="#E6E4E4"/>
 
 
 
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/violet_circular_border"
+                android:orientation="vertical"
+                android:padding="@dimen/medium">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="Your Wish List"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="View all"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_circular_border"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="12dp">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:src="@drawable/onplus2" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="@dimen/small"
+                                android:paddingRight="@dimen/small">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Oneplus 11"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="$350"
+                                        android:textColor="@color/textColor"
+                                        android:textSize="13sp" />
+
+                                    <RelativeLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/xsmall">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="$750"
+                                            android:layout_marginStart="@dimen/xsmall"
+                                            android:textColor="@color/orange"
+                                            android:textSize="13sp" />
+
+                                        <LinearLayout
+                                            android:layout_width="30dp"
+                                            android:background="@color/orange"
+                                            android:layout_centerVertical="true"
+                                            android:layout_height="1dp"/>
+                                    </RelativeLayout>
+
+                                    <Space
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"/>
+                                    <ImageView
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:padding="6.5dp"
+                                        android:src="@drawable/heart_orange_fill"
+                                        android:background="@drawable/light_orange_circle"/>
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_circular_border"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:padding="12dp">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:src="@drawable/onplus3" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="@dimen/small"
+                                android:paddingRight="@dimen/small">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Oneplus 11pro"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="$350"
+                                        android:textColor="@color/textColor"
+                                        android:textSize="13sp" />
+
+                                    <RelativeLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/xsmall">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="$750"
+                                            android:layout_marginStart="@dimen/xsmall"
+                                            android:textColor="@color/orange"
+                                            android:textSize="13sp" />
+
+                                        <LinearLayout
+                                            android:layout_width="30dp"
+                                            android:background="@color/orange"
+                                            android:layout_centerVertical="true"
+                                            android:layout_height="1dp"/>
+                                    </RelativeLayout>
+
+                                    <Space
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"/>
+                                    <ImageView
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:padding="6.5dp"
+                                        android:src="@drawable/heart_orange_fill"
+                                        android:background="@drawable/light_orange_circle"/>
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_circular_border"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:padding="12dp">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:src="@drawable/oneplus1" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:paddingLeft="@dimen/small"
+                                android:paddingRight="@dimen/small">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="oneplus 11R"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="$350"
+                                        android:textColor="@color/textColor"
+                                        android:textSize="13sp" />
+
+                                    <RelativeLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/xsmall">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="$750"
+                                            android:layout_marginStart="@dimen/xsmall"
+                                            android:textColor="@color/orange"
+                                            android:textSize="13sp" />
+
+                                        <LinearLayout
+                                            android:layout_width="30dp"
+                                            android:background="@color/orange"
+                                            android:layout_centerVertical="true"
+                                            android:layout_height="1dp"/>
+                                    </RelativeLayout>
+
+                                    <Space
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"/>
+                                    <ImageView
+                                        android:layout_width="25dp"
+                                        android:layout_height="25dp"
+                                        android:padding="6.5dp"
+                                        android:src="@drawable/heart_orange_fill"
+                                        android:background="@drawable/light_orange_circle"/>
+
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:background="#E6E4E4"/>
+
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/Launch_SalesStart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:background="@drawable/oneplus1" />
+
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="#E6E4E4"/>
+
+
+
+            </LinearLayout>
+
+
+<!--            brand promotion-->
+
+            <LinearLayout
+                android:id="@+id/PromotionLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#B6AEAE"
+                android:padding="@dimen/medium">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small">
+
+                    <TextView
+                        android:id="@+id/promotionTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="From Oneplus"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="Promotion"
+                        android:textStyle="bold"
+                        android:layout_below="@id/promotionTv"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:text="View all"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_circular_border"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="12dp">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:src="@drawable/onplus2" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_circular_border"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:padding="12dp">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:src="@drawable/onplus3" />
+
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_circular_border"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:padding="12dp">
+
+                            <ImageView
+                                android:layout_width="120dp"
+                                android:layout_height="120dp"
+                                android:src="@drawable/oneplus1" />
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+
+            </LinearLayout>
+
+          <View
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:background="#E6E4E4"/>
+
+            <LinearLayout
+                android:id="@+id/PromotionCodeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="#B6AEAE"
+                android:padding="@dimen/medium">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="Get Assured Reward using Promotion Code"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+
+                </RelativeLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_circular_border"
+                            android:orientation="vertical"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="120dp"
+                                android:src="@drawable/onplus2" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Get uo to 50% off"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"/>
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Claim Now"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_circular_border"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginStart="20dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="120dp"
+                                android:src="@drawable/onplus2" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Get uo to 50% off"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"/>
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Claim Now"/>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/white_circular_border"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginStart="20dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="120dp"
+                                android:src="@drawable/onplus2" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Get uo to 50% off"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"/>
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Claim Now"/>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+
+            </LinearLayout>
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="80dp"/>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </androidx.core.widget.NestedScrollView>
 
 
 
@@ -226,4 +702,6 @@
 
 
 
-</RelativeLayout>
+
+
+</LinearLayout>
