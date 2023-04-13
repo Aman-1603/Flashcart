@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class SellerBannerProduct_fragmnet extends Fragment {
 
 
     ImageView bannerimage;
+    EditText bannerTitle;
     Button uploadbutton;
 
     private static final int CAMERA_REQUEST_CODE = 200;
@@ -71,6 +73,7 @@ public class SellerBannerProduct_fragmnet extends Fragment {
 
         bannerimage = view.findViewById(R.id.bannerImage);
         uploadbutton = view.findViewById(R.id.bannerupload);
+        bannerTitle = view.findViewById(R.id.bannerTitle);
 
 
 
@@ -131,11 +134,13 @@ public class SellerBannerProduct_fragmnet extends Fragment {
 
                             HashMap<String, Object> hashMap = new HashMap<>();
 
+                            String title = bannerTitle.getText().toString();
                             //setup data to upload
 
                             hashMap.put("BannerID",""+timestamp);
                             hashMap.put("BannerIcon",""+downloadImageUri); //no image
                             hashMap.put("TimeStamp",""+timestamp);
+                            hashMap.put("BannerTitle",title);
                             hashMap.put("uid",""+firebaseAuth.getUid());
 
                             DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");

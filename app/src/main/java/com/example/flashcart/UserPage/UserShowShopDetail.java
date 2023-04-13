@@ -15,21 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.flashcart.Adaptor.AdaptorUserShopProduct;
 import com.example.flashcart.Model.ModelProduct;
-import com.example.flashcart.Model.ModelShop;
 import com.example.flashcart.R;
-import com.example.flashcart.User_review_write_fragment;
 import com.example.flashcart.categorylist.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -38,8 +39,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserShowShopDetail extends Fragment {
 
@@ -66,6 +69,8 @@ public class UserShowShopDetail extends Fragment {
     private AdaptorUserShopProduct adaptorUserShopProduct;
 
     ImageButton reviewButton;
+
+    ImageSlider imageSlider;
 
 
 
@@ -98,6 +103,8 @@ public class UserShowShopDetail extends Fragment {
         flterproductTv = view.findViewById(R.id.flterproductTv);
         searchproductEt1 = view.findViewById(R.id.searchproductEt1);
         reviewButton = view.findViewById(R.id.reviewbtn);
+        imageSlider = view.findViewById(R.id.image_slider);
+
 
 
 
@@ -116,6 +123,9 @@ public class UserShowShopDetail extends Fragment {
         flterproductTv.setText(shopUid);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+
+        loadBannerImage();
 
         loadMyInfo();
         loadShopDetail();
@@ -266,6 +276,7 @@ public class UserShowShopDetail extends Fragment {
 
         return view;
     }
+
 
 
     private void dialPhone() {
@@ -433,5 +444,32 @@ public class UserShowShopDetail extends Fragment {
             Toast.makeText(getActivity(), "Map activity finished", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
+    private void loadBannerImage() {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+        ref.child(shopUid).child("BannerImage").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<SlideModel> slideModels = new ArrayList<>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String imageUrl = snapshot.child("BannerIcon").getValue().toString();
+                    String title = snapshot.child("BannerTitle").getValue().toString();
+                    slideModels.add(new SlideModel(imageUrl,title,ScaleTypes.CENTER_CROP));
+
+                    Log.d("Image slider",imageUrl);
+                }
+                imageSlider.setImageList(slideModels, ScaleTypes.CENTER_CROP);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle database error
+            }
+        });
+    }
+
+
 
 }
