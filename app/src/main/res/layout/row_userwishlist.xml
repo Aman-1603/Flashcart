@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="10dp">
+
+
+    <LinearLayout
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_circular_border"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/wishlistImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/onplus2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/small"
+            android:paddingRight="@dimen/small">
+            <TextView
+                android:id="@+id/wishlistTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Oneplus 11"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/wishlistprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$350"
+                    android:textColor="@color/textColor"
+                    android:textSize="13sp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/xsmall">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$750"
+                        android:layout_marginStart="@dimen/xsmall"
+                        android:textColor="@color/orange"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="30dp"
+                        android:background="@color/orange"
+                        android:layout_centerVertical="true"
+                        android:layout_height="1dp"/>
+                </RelativeLayout>
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:id="@+id/wishlistdeleteBtn"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:padding="6.5dp"
+                    android:src="@drawable/heart_orange_fill"
+                    android:background="@drawable/baseline_delete_24"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

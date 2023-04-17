@@ -5,12 +5,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +34,8 @@ public class Seller_Account_page_Fragment extends Fragment {
     TextView notificationStatusTv;
     SwitchCompat notificationswitch;
     FirebaseAuth firebaseAuth;
+
+    Button Promotionbtn;
 
     boolean isChecked = false;
 
@@ -65,6 +71,7 @@ public class Seller_Account_page_Fragment extends Fragment {
 
         notificationStatusTv = view.findViewById(R.id.notificationStatusTv);
         notificationswitch = view.findViewById(R.id.notificationswitch);
+        Promotionbtn = view.findViewById(R.id.Promotionbtn);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -104,7 +111,40 @@ public class Seller_Account_page_Fragment extends Fragment {
         });
 
 
+        Promotionbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showPromotionPage();
+
+            }
+        });
+
+
         return view;
+    }
+
+    private void showPromotionPage() {
+
+        SellerPromotionCodeFragment newFragment = new SellerPromotionCodeFragment();
+
+
+        // Get the fragment manager
+        FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+
+        // Begin a new transaction
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        // Replace the previous fragment with the new fragment
+        fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+        // Add the transaction to the back stack so the user can navigate back to the previous fragment
+        fragmentTransaction.addToBackStack(null);
+
+        // Commit the transaction
+        fragmentTransaction.commit();
+
+
     }
 
     private void subscribeToTopic(){

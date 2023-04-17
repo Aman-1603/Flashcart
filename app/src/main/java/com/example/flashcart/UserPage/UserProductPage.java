@@ -47,7 +47,7 @@ public class UserProductPage extends Fragment {
 
     TextView productTitleTV,productTitle1TV,ProductPriceTV,product_descriptionTV,addressTV,cityTV,StateTV,CountryTV,PhoneTV;
 
-    ImageView productimage;
+    ImageView productimage,wishlistbtn;
     TextView productUid;
 
     String ProductIcon,ProductTitle,ProductPrice,ProductDescription,ProductCategory,ProductDiscountPrice,ProductDiscountNote,ProductDiscountAvailable,ProductQuantity;
@@ -87,6 +87,7 @@ public class UserProductPage extends Fragment {
         productUid = view.findViewById(R.id.productUid);
         productimage = view.findViewById(R.id.product_image);
         addtoCart = view.findViewById(R.id.add_to_cart_button);
+        wishlistbtn = view.findViewById(R.id.wishlistbtn);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -113,11 +114,20 @@ public class UserProductPage extends Fragment {
             }
         });
 
+        wishlistbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wishList();
+            }
+        });
+
 
 
 
         return view;
     }
+
+
 
 
     private void loadmyInfo() {
@@ -393,7 +403,77 @@ public class UserProductPage extends Fragment {
 
 
                         }
+
+
+
+
+    private void wishList() {
+
+
+        String title = ProductTitle;
+        String priceEach = ProductPrice;
+        String price = String.valueOf(finalcost);
+        String quantity = ProductQuantity;
+
+
+
+        pushWishListData(ItemUid,title,priceEach,price,quantity);
+
+    }
+
+    private void pushWishListData(String itemUid, String title, String priceEach, String price, String quantity) {
+
+
+        String timestamp = ""+itemUid;
+//        image_uri = Uri.parse(ProductIcon);
+
+
+
+
+        //setup data to upload
+
+        HashMap<String, Object> cartItem = new HashMap<>();
+
+        cartItem.put("itemUid", itemUid);
+        cartItem.put("ShopUid",ShopUid);
+        cartItem.put("title", title);
+        cartItem.put("priceEach", priceEach);
+
+        cartItem.put("price", price);
+        cartItem.put("quantity", quantity);
+
+        cartItem.put("ProductIcon",ProductIcon); //no image
+        cartItem.put("uid", "" + firebaseAuth.getUid());
+
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+
+        reference.child(firebaseAuth.getUid()).child("UserWishList").child(timestamp).setValue(cartItem)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+//                                            progressDialog.dismiss();
+                        Toast.makeText(getContext(), "Products Added", Toast.LENGTH_SHORT).show();
+
+
                     }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+//                                            progressDialog.dismiss();
+                        Toast.makeText(getContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
+    }
+
+
+}
 
 
 
