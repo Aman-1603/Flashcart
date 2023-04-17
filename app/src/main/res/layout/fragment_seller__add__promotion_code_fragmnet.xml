@@ -10,7 +10,7 @@
         android:id="@+id/topbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/purple_200"
         android:padding="16dp">
 
         <ImageView
@@ -49,5 +49,115 @@
             android:src="@drawable/baseline_add_circle_24" />
 
     </RelativeLayout>
+
+    <com.blogspot.atifsoftwares.circularimageview.CircularImageView
+        android:id="@+id/imageTv"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_below="@id/topbar"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_circle01"
+        android:src="@drawable/discountcode" />
+
+
+    <EditText
+        android:id="@+id/promocodeEdt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/imageTv"
+        android:hint="Promotion Code"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:backgroundTint="#E4E4E4"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:drawableStart="@drawable/discountcode2"
+        android:padding="10dp"
+        android:inputType="textCapWords"
+        android:background="@drawable/search_background"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/promodescEdt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/promocodeEdt"
+        android:hint="Promotion Description"
+        android:backgroundTint="#E4E4E4"
+        android:layout_marginStart="10dp"
+        android:inputType="textCapWords"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:drawableStart="@drawable/discountcode2"
+        android:padding="10dp"
+        android:background="@drawable/search_background"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/promopriceEdt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/promodescEdt"
+        android:hint="Promotion Price"
+        android:backgroundTint="#E4E4E4"
+        android:layout_marginStart="10dp"
+        android:inputType="textCapWords"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:drawableStart="@drawable/discountcode2"
+        android:padding="10dp"
+        android:background="@drawable/search_background"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/promoMinOrderEdt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/promopriceEdt"
+        android:hint="Min order"
+        android:backgroundTint="#E4E4E4"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:inputType="textCapWords"
+        android:drawableStart="@drawable/discountcode2"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:background="@drawable/search_background"
+        android:layout_marginTop="15dp"/>
+
+    <EditText
+        android:id="@+id/promoexpriedateedt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/promoMinOrderEdt"
+        android:hint="Expire Date"
+        android:backgroundTint="#E4E4E4"
+        android:inputType="textCapWords"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:drawableStart="@drawable/discountcode2"
+        android:padding="10dp"
+        android:background="@drawable/search_background"
+        android:layout_marginTop="15dp"/>
+
+
+    <Button
+        android:id="@+id/addpromobtn"
+        android:layout_width="match_parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="Add promo code"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:background="@drawable/shape_rec07"
+        android:layout_below="@id/promoexpriedateedt"
+        android:layout_marginTop="20dp"
+        android:layout_height="55dp"/>
+
 
 </RelativeLayout>
