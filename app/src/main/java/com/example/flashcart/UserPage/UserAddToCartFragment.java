@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.example.flashcart.R;
 import com.example.flashcart.categorylist.Constants;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,9 +39,13 @@ import com.google.firebase.database.ValueEventListener;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
+import org.checkerframework.checker.units.qual.C;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,16 +59,25 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
     FirebaseAuth firebaseAuth;
 
 
-    TextView producttotal,deliveryFeeTv,subtotalTv;
+    TextView producttotal,deliveryFeeTv,subtotalTv,promotiondescriptionTv,discountTv;
 
     Button finalorder;
 
     String shopUid,deliveryfee;
+    double finalpromoprice = 0;
 
     String myLatiitude,myLongitude,myphone;
 
     double allTotalPrice = 0.0;
     double subtotalPrice = 0.0;
+
+    EditText promocodeEt;
+
+    FloatingActionButton validateBtn;
+
+    Button applyBtn;
+
+    int ispromoCheck = 0;
 
 
     AdaptorCartItem adaptorCartItem;
@@ -90,6 +105,11 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
         subtotalTv = view.findViewById(R.id.subtotalTv);
         producttotal = view.findViewById(R.id.productTotalTv);
         finalorder = view.findViewById(R.id.finalorderTv);
+        promotiondescriptionTv = view.findViewById(R.id.promotionDescription);
+        promocodeEt = view.findViewById(R.id.promocodeEt);
+        discountTv = view.findViewById(R.id.discount);
+        validateBtn = view.findViewById(R.id.promoValidatebtn);
+        applyBtn = view.findViewById(R.id.applypromocodebtn);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -98,6 +118,43 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
 
         loadmyInfo();
         loadcartItem();
+
+
+
+
+        validateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String promocode = promocodeEt.getText().toString().trim();
+
+                checkPromoCodeAvailability(promocode);
+            }
+        });
+
+
+
+        applyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (ispromoCheck == 1){
+
+                    priceWithDiscount();
+
+                    finalpromoprice = Double.parseDouble(promoprice);
+
+
+                }else {
+
+                    Toast.makeText(getContext(), "Please First Apply promocode then Apply...", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
+
 
 
         finalorder.setOnClickListener(new View.OnClickListener() {
@@ -179,6 +236,210 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
 
     }
 
+
+    private void priceWithDiscount(){
+
+
+        discountTv.setText("₹" + promoprice);
+        deliveryFeeTv.setText("₹"+ deliveryfee);
+        producttotal.setText("₹"+allTotalPrice);
+        subtotalTv.setText("₹"+(allTotalPrice + Double.parseDouble(deliveryfee.replace("₹","")) - Double.parseDouble(promoprice)));
+
+
+    }
+
+
+    private void priceWithoutDiscount(){
+
+        discountTv.setText("₹0");
+        deliveryFeeTv.setText("₹"+deliveryfee);
+        producttotal.setText("₹"+allTotalPrice);
+        subtotalTv.setText("₹"+(allTotalPrice + Double.parseDouble(deliveryfee.replace("₹",""))));
+
+
+    }
+
+    public boolean isPromoCodeApplied = false;
+
+    public String promoId,promotimestamp,promoCode,promoDescritpion,promoExpdate,promoMinimumOrder,promoprice;
+
+    public void checkPromoCodeAvailability(String PromotioCode){
+
+        //setup progress bar
+
+        ProgressDialog progressDialog = new ProgressDialog(getContext());
+        progressDialog.setTitle("Please Wait...");
+        progressDialog.setMessage("Checking Promo Code Availability at our end please wait ......");
+        progressDialog.setCanceledOnTouchOutside(false);
+
+
+        //promocode is not applied yet...
+        isPromoCodeApplied = false;
+        applyBtn.setText("Apply");
+
+        priceWithoutDiscount();
+
+
+        //check promocode availability
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+
+        ref.child(shopUid).child("PromotionCodes").orderByChild("PromoCode").equalTo(PromotioCode)
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        //checking if promo code exist
+
+                        if (snapshot.exists()){
+
+                            progressDialog.dismiss();
+                            for (DataSnapshot ds : snapshot.getChildren()){
+
+                                promoId = ""+ds.child("id").getValue();
+                                promotimestamp = ""+ds.child("timestamp").getValue();
+                                promoCode = ""+ds.child("PromoCode").getValue();
+                                promoDescritpion = ""+ds.child("PromoDescription").getValue();
+                                promoExpdate = ""+ds.child("ExpireDate").getValue();
+                                promoMinimumOrder = ""+ds.child("MinOrderPrice").getValue();
+                                promoprice = ""+ds.child("PromoPrice").getValue();
+
+
+                                //now we will check if code id expire or not
+
+
+                                checkCodeExpireDate();
+
+                            }
+
+                        }else {
+
+                            //promo code not exist
+
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(), "Entered Promo Code not Exist", Toast.LENGTH_SHORT).show();
+                            applyBtn.setVisibility(View.GONE);
+                            promotiondescriptionTv.setVisibility(View.GONE);
+
+                            promotiondescriptionTv.setText("");
+
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+    }
+
+
+    private void checkCodeExpireDate(){
+
+
+        //check current date
+
+        Calendar calendar = Calendar.getInstance();
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;  // because month start from 0 instead of 1;
+
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        //now we will concatinate date in real form like 18/04/2023
+
+        String todayDate =  day + "/"+ month + "/" + year;
+
+        //check expiry
+
+
+        try {
+
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            //current date
+
+            Date CurrentDate = simpleDateFormat.parse(todayDate);
+            Date ExpireDate = simpleDateFormat.parse(promoExpdate);
+
+            Log.d("current date", String.valueOf(CurrentDate));
+
+            if (ExpireDate.compareTo(CurrentDate) > 0){
+
+                //so 1 occure after 2  that means (date is not expired)
+
+                checkMinimumOrderPrice();
+
+            } else if (ExpireDate.compareTo(CurrentDate) < 0) {
+
+                //date 1 occured before date 2 (Code expired)
+
+                Toast.makeText(getContext(), "Promotion Code Expired on "+ promoExpdate, Toast.LENGTH_SHORT).show();
+
+                applyBtn.setVisibility(View.GONE);
+                promotiondescriptionTv.setVisibility(View.GONE);
+                promotiondescriptionTv.setText("");
+
+
+
+            } else if (ExpireDate.compareTo(CurrentDate) == 0) {
+
+                //both dates are equal
+
+                checkMinimumOrderPrice();
+
+            }
+
+        }catch (Exception e){
+
+            Log.d("checkCodeexpiredate","checkCodeexpiredate");
+
+            Log.d("checkCodeexpiredate",e.getLocalizedMessage());
+
+            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+
+
+    }
+
+    private void checkMinimumOrderPrice(){
+
+
+        Log.d("checkMinimumOrderPrice","checkMinimumOrderPrice");
+
+        if (Double.parseDouble(String.format("%2f",subtotalPrice))<Double.parseDouble(promoMinimumOrder)){
+
+            Toast.makeText(getContext(), "This order valid within minimum order of "+promoMinimumOrder, Toast.LENGTH_SHORT).show();
+            applyBtn.setVisibility(View.GONE);
+            promotiondescriptionTv.setVisibility(View.GONE);
+            promotiondescriptionTv.setText("");
+
+        }else {
+
+
+            applyBtn.setVisibility(View.VISIBLE);
+            promotiondescriptionTv.setVisibility(View.VISIBLE);
+            promotiondescriptionTv.setText(""+promoDescritpion);
+
+
+            promotiondescriptionTv.setText(promoDescritpion);
+
+//            priceWithDiscount();
+
+            //if all condition is perfect then call priceWithDiscount(); to change price
+
+            ispromoCheck = 1;
+
+
+        }
+
+
+    }
+
+
     private void submitOrder() {
 
         ProgressDialog progressDialog = new ProgressDialog(getContext());
@@ -197,7 +458,7 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
         hashMap.put("orderStatus","In Progress");
         hashMap.put("orderBy",""+firebaseAuth.getUid());
         hashMap.put("orderTo",""+shopUid);
-        hashMap.put("orderFinalSubTotal",""+subtotalPrice);
+        hashMap.put("orderFinalSubTotal",""+(subtotalPrice - finalpromoprice));//if promo price applicable then deduct othervise bydefualb be 0
 
 
 
@@ -299,9 +560,13 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
     private void loadcartItem() {
 
 
+
         list = new ArrayList<>();
         adaptorCartItem = new AdaptorCartItem(getContext(),list);
         recyclerView.setAdapter(adaptorCartItem);
+
+
+
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");

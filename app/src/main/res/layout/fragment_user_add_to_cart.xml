@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     tools:context=".UserPage.UserAddToCartFragment">
 
 
@@ -74,9 +75,86 @@
         android:layout_marginTop="10dp">
 
     <RelativeLayout
+        android:id="@+id/pricelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white">
+
+
+
+<!--        promo input layout-->
+
+        <RelativeLayout
+            android:id="@+id/promolayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_rec02"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/promolabelTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:padding="5dp"
+                android:text="Promotion Code"
+                android:textStyle="bold"
+                android:textSize="18dp"
+                android:textColor="@color/design_default_color_primary"/>
+
+            <EditText
+                android:id="@+id/promocodeEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/promolabelTv"
+                android:hint="promocode.."
+                android:layout_toStartOf="@id/promoValidatebtn"
+                android:textColor="@color/black"
+                android:padding="10dp"
+                android:textColorHint="@color/grey_font"
+                android:layout_marginEnd="5dp"/>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/promoValidatebtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/promolabelTv"
+                android:src="@drawable/baseline_send_24"
+                android:tint="@color/white"
+                android:layout_alignParentEnd="true"
+                app:fabSize="mini"
+                android:background="#25FFFFFF"/>
+
+
+
+            <TextView
+                android:id="@+id/promotionDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/promocodeEt"
+                android:hint="Promotion Code Description"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey_font"
+                android:textSize="15dp"/>
+            
+            
+            <Button
+                android:id="@+id/applypromocodebtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apply"
+                android:layout_below="@id/promotionDescription"
+                android:textColor="@color/white"
+                style="@style/TextAppearance.AppCompat.Widget.Button.Colored"/>
+
+
+        </RelativeLayout>
+
+
+
 
         <TextView
             android:id="@+id/productTotal"
@@ -84,6 +162,7 @@
             android:layout_height="wrap_content"
             android:text="Product Total"
             android:paddingLeft="10dp"
+            android:layout_below="@id/promolayout"
             android:textColor="@color/black"
             android:textSize="22dp" />
 
@@ -91,6 +170,7 @@
             android:id="@+id/productTotalTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/promolayout"
             android:text="₹1000"
             android:paddingLeft="10dp"
             android:layout_toEndOf="@id/productTotal"
@@ -101,7 +181,7 @@
             android:id="@+id/deliveryfee"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delivery Fee"
+            android:text="Delivery Fee   "
             android:paddingLeft="10dp"
             android:layout_below="@id/productTotal"
             android:textColor="@color/black"
@@ -119,13 +199,39 @@
             android:textSize="22dp" />
 
 
+
+
+
+
+        <TextView
+            android:id="@+id/discountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discount :"
+            android:paddingLeft="10dp"
+            android:layout_below="@id/deliveryfee"
+            android:textColor="@color/black"
+            android:textSize="22dp" />
+
+        <TextView
+            android:id="@+id/discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- ₹0"
+            android:paddingLeft="10dp"
+            android:layout_below="@id/deliveryfee"
+            android:layout_toEndOf="@id/deliveryfee"
+            android:textColor="@color/textColor"
+            android:textSize="22dp" />
+
+
         <TextView
             android:id="@+id/subtotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SubTotal"
             android:textColor="@color/black"
-            android:layout_below="@id/deliveryfee"
+            android:layout_below="@id/discount"
             android:paddingLeft="10dp"
             android:textSize="25dp" />
 
@@ -136,7 +242,7 @@
             android:text="₹1000"
             android:paddingLeft="10dp"
             android:layout_toEndOf="@id/deliveryfee"
-            android:layout_below="@id/deliveryfee"
+            android:layout_below="@id/discount"
             android:textColor="@color/textColor"
             android:textSize="25dp" />
 
