@@ -5,10 +5,14 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -218,7 +222,7 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
             option.put("description","orderId");
             option.put("Image","https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             option.put("theme.color","#3399cc");
-            option.put("Currency","₹");
+            option.put("currency","INR");
             option.put("Final Amount",finalamount);
             option.put("Name","ansariaman1603@gmail.com");
             option.put("Contact","9265413820");
@@ -226,11 +230,15 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
 
             checkout.open(getActivity(),option);
 
+            showsucesspage();
+
 
 
         }catch (Exception e){
 
             Toast.makeText(activity, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+
+            showsucesspage();
 
         }
 
@@ -731,12 +739,47 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
 
         Toast.makeText(getContext(), "Payment success", Toast.LENGTH_SHORT).show();
 
+        showsucesspage();
+
+
     }
+
 
     @Override
     public void onPaymentError(int i, String s) {
 
         Toast.makeText(getContext(), "Payment failed", Toast.LENGTH_SHORT).show();
+        showsucesspage();
 
     }
+
+
+    private void showsucesspage() {
+
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                UserFinalOrder_Success_Fail_messageshow newFragment = new UserFinalOrder_Success_Fail_messageshow();
+
+                // Get the fragment manager
+                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+            }
+        }, 3000); // 3 seconds delay
+
+
+    }
+
 }

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9AD67836"
+    android:background="@color/white"
     tools:context=".UserPage.UserFinalOrder_Success_Fail_messageshow">
 
 
@@ -12,95 +12,93 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:id="@+id/topbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#f47f2c"
-            android:padding="16dp">
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/grey_circular_border"
-                android:padding="12dp"
-                android:src="@drawable/square_icon" />
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/product_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Order Details"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
-
-            </LinearLayout>
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/grey_circular_border"
-                android:padding="@dimen/small"
-                android:src="@drawable/heart" />
-
-
-
-
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-
-
-    <RelativeLayout
-        android:id="@+id/layout4"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        android:layout_below="@id/topbar1">
 
 
         <ImageView
-            android:id="@id/image1"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/flashcartlogo"/>
-
-
-        <ImageView
-            android:id="@+id/image2"
+            android:id="@+id/sucessimage"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/image1"
-            android:translationY="-80dp"
-            android:src="@drawable/sucess"/>
+            android:background="@drawable/ordersucess"/>
+
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Thank You"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/sucessimage"/>
+
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="Your order has been confirmed."
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/text1"/>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/text1"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/ordersucesstick"
+            android:layout_alignEnd="@id/text2"/>
 
 
     </RelativeLayout>
+
 
     <RelativeLayout
-        android:id="@+id/layout1"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/topbar2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_layout1"
-        android:layout_below="@id/layout4">
+        android:layout_height="wrap_content">
 
 
 
     </RelativeLayout>
+
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:background="@drawable/bottom_background"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="written back"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/shape_circle03"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"/>
+
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="180dp"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:text="Have a patience your order will be deliver with in 4 to 5 day to your doorstep"
+        />
 
 
 </RelativeLayout>
