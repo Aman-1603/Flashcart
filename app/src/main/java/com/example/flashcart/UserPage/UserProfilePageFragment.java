@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,11 @@ public class UserProfilePageFragment extends Fragment {
 
     TextView notificationStatusTv;
     SwitchCompat notificationswitch;
+
+    RelativeLayout big_wishlist;
+
+
+    Button profilebutton4,profilebutton2,return_home;
 
 
 
@@ -71,6 +77,69 @@ public class UserProfilePageFragment extends Fragment {
         profilebutton1 = view.findViewById(R.id.profilebutton1);
         notificationStatusTv = view.findViewById(R.id.notificationStatusTv);
         notificationswitch = view.findViewById(R.id.notificationswitch);
+        profilebutton4 = view.findViewById(R.id.profilebutton4);
+
+        big_wishlist = view.findViewById(R.id.big_wishlist);
+        profilebutton2 = view.findViewById(R.id.profilebutton2);
+        return_home = view.findViewById(R.id.return_home);
+
+
+
+        big_wishlist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                UserOrderPage newFragment = new UserOrderPage();
+
+
+                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+
+
+            }
+        });
+
+
+
+        profilebutton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                UserOrderPage newFragment = new UserOrderPage();
+
+
+                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+
+
+            }
+        });
+
+
+
 
         profilebutton1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,6 +166,59 @@ public class UserProfilePageFragment extends Fragment {
             }
         });
 
+
+
+        return_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                UserHomeFragment newFragment = new UserHomeFragment();
+
+
+                // Get the fragment manager
+                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+
+
+            }
+        });
+
+        profilebutton4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                User_WishList_Fragment newFragment = new User_WishList_Fragment();
+
+
+                // Get the fragment manager
+                FragmentManager fragmentManager = ((AppCompatActivity) getContext()).getSupportFragmentManager();
+
+                // Begin a new transaction
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                // Replace the previous fragment with the new fragment
+                fragmentTransaction.replace(R.id.Frame_layout, newFragment);
+
+                // Add the transaction to the back stack so the user can navigate back to the previous fragment
+                fragmentTransaction.addToBackStack(null);
+
+                // Commit the transaction
+                fragmentTransaction.commit();
+
+
+            }
+        });
 
 
 

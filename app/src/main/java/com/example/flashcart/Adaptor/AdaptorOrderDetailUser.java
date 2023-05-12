@@ -50,7 +50,7 @@ public class AdaptorOrderDetailUser extends RecyclerView.Adapter<AdaptorOrderDet
         ModelCartItemRecieve modelCartItemRecieve = cartItems.get(position);
 
         String pid = modelCartItemRecieve.getItemUid();
-        String title = modelCartItemRecieve.getTitle();
+        String title = modelCartItemRecieve.getName();
         String price = modelCartItemRecieve.getPrice();
         String quantity = modelCartItemRecieve.getQuantity();
         String producticon = modelCartItemRecieve.getProductIcon();

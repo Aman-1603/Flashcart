@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ModelCartItemRecieve implements Serializable {
 
-    String uid,quantity,ProductIcon,price,ShopUid,title,priceEach,itemUid;
+    String uid,quantity,ProductIcon,price,ShopUid,title,priceEach,itemUid,name;
 
 
     public ModelCartItemRecieve(){
@@ -12,7 +12,7 @@ public class ModelCartItemRecieve implements Serializable {
     }
 
 
-    public ModelCartItemRecieve(String uid, String quantity, String productIcon, String price, String shopUid, String title, String priceEach, String itemUid) {
+    public ModelCartItemRecieve(String uid, String quantity, String productIcon, String price, String shopUid, String title, String priceEach, String itemUid, String name) {
         this.uid = uid;
         this.quantity = quantity;
         ProductIcon = productIcon;
@@ -21,6 +21,7 @@ public class ModelCartItemRecieve implements Serializable {
         this.title = title;
         this.priceEach = priceEach;
         this.itemUid = itemUid;
+        this.name = name;
     }
 
     public String getUid() {
@@ -85,5 +86,14 @@ public class ModelCartItemRecieve implements Serializable {
 
     public void setItemUid(String itemUid) {
         this.itemUid = itemUid;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

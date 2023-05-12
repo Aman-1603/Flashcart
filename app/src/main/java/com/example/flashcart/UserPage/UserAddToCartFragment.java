@@ -737,7 +737,7 @@ public class UserAddToCartFragment extends Fragment implements PaymentResultList
     @Override
     public void onPaymentSuccess(String s) {
 
-        Toast.makeText(getContext(), "Payment success", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), "Payment success", Toast.LENGTH_SHORT).show();
 
         showsucesspage();
 
